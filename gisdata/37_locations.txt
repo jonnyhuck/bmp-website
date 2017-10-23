@@ -1,0 +1,10 @@
+1TwaddellRoundabout.jpg, -, -
+2CommunityMural.jpg, 54.6151194444444, -5.96595833333333
+3EvertonComplex.jpg, 54.615525, -5.96742222222222
+4AllianceAveSecurityCamera.jpg, 54.6174194444444, -5.96725
+5EntrancetoGlenbryn.jpg, 54.6176555555556, -5.967175
+6KATPostBox.jpg, 54.6186861111111, -5.96750277777778
+7aVirginMaryMural.jpg, 54.6159444444444, -5.96144444444444
+7bVirginMaryMural.jpg, 54.6163444444444, -5.96166388888889
+8aArdileaCloseMemorialGarden.jpg, 54.6151972222222, -5.9511
+8BArdileaCloseMural.jpg, 54.6152027777778, -5.95103055555556
