@@ -31,15 +31,15 @@
 
 
 		var route = L.featureGroup([
-// 			L.marker(trd),
-			L.polyline([trd, ams]),
-// 			L.marker(ams),
-			L.polyline([ams, lnd]),
-// 			L.marker(lnd),
-			L.polyline([lnd, mad]),
-// 			L.marker(mad),
-			L.polyline([mad, vlc]),
-// 			L.marker(vlc)
+			L.marker(trd),
+			L.polyline([trd, ams], {snakingPause: 2000}),
+			L.marker(ams),
+			L.polyline([ams, lnd], {snakingPause: 4000}),
+			L.marker(lnd),
+			L.polyline([lnd, mad], {snakingPause: 6000}),
+			L.marker(mad),
+			L.polyline([mad, vlc], {snakingPause: 8000}),
+			L.marker(vlc)
 		]);
 
 		var map = L.map('map');

@@ -1,4 +1,7 @@
 
+
+
+
 ///// FIXME: Use path._rings instead of path._latlngs???
 ///// FIXME: Panic if this._map doesn't exist when called.
 ///// FIXME: Implement snakeOut()
@@ -180,17 +183,20 @@ L.LayerGroup.include({
 		}
 
 		var currentLayer = this._snakingLayers[this._snakingLayersDone];
+		var pause = currentLayer.options.snakingPause
+			? currentLayer.options.snakingPause
+			: this.options.snakingPause;
 
 		this._snakingLayersDone++;
 
 		this.addLayer(currentLayer);
 		if ('snakeIn' in currentLayer) {
 			currentLayer.once('snakeend', function(){
-				setTimeout(this._snakeNext.bind(this), this.options.snakingPause);
+				setTimeout(this._snakeNext.bind(this), pause);
 			}, this);
 			currentLayer.snakeIn();
 		} else {
-			setTimeout(this._snakeNext.bind(this), this.options.snakingPause);
+			setTimeout(this._snakeNext.bind(this), pause);
 		}
 
 
@@ -204,3 +210,10 @@ L.LayerGroup.include({
 L.LayerGroup.mergeOptions({
 	snakingPause: 200
 });
+
+
+
+
+
+
+
