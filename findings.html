@@ -89,7 +89,7 @@
 								.range(['#b3cde3', '#fbb4ae', '#ccebc5']);
 
 							// load the data
-							d3.csv("data/ingroup-outgroup.csv", function(d, i, columns) {
+							d3.csv("gisdata/ingroup-outgroup.csv", function(d, i, columns) {
 								for (i = 1, t = 0; i < columns.length; ++i) t += d[columns[i]] = +d[columns[i]];
 								d.total = t;
 								return d;
@@ -234,8 +234,8 @@
 					<div class="row 200%">
 						<div class="6u 12u$(medium)">
 							<div class="figure">
-								<img src="./images/pavement.png" alt="Painted Paving Stones" />
-								<p class="caption">...</p>
+								<span class="image fit"><img src="./images/pavement.png" alt="Painted Paving Stones" />
+								<p class="caption">...</p></span>
 							</div>
 						</div>
 						<div class="6u$ 12u$(medium)">
