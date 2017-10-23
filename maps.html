@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>About Us</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		
+		<!-- CSS and scripts for map -->
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+		<script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+		<script src="assets/js/Leaflet.Sleep.js"></script>
+		
+		<!-- More CSS for Map -->
+		<style>
+			body { margin:0; padding:0; }
+			.map { width:100%; height: 400px; } 
+		</style>
+
+	</head>
+	<body class="subpage">
+
+			<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="index.html" class="logo"><strong>BELFAST</strong> MOBILITY PROJECT</a>
+					<nav id="nav">
+						<a href="index.html">Home</a>
+						<a href="findings.html">Findings</a>
+						<a href="researchers.html">For Researchers</a>
+						<a href="maps.html">Interactive Maps</a>
+						<a href="about-us.html">About Us</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
+
+			<!-- Content -->
+			<section id="main" class="wrapper">
+				<div class="inner">
+			
+					<header class="align-center">
+						<h2>Interactive Maps</h2>
+						<p><em>Here are a selection of interactive maps that may be used to explore our findings in detail</em></p>
+					</header>	
+					
+					<div class="row 200%">
+					
+						<!-- Community Affiliation -->
+						<div class="6u 12u$(medium)">							
+							<h2>Participatory GIS (PGIS) data on community affiliation.</h2>
+						</div>
+						
+						<div class="6u$ 12u$(medium)">					
+							
+							<!-- Map div -->
+							<div class="map" id="community_map"></div>
+							<p class="caption"><a target='_blank' href="./maps/community.html">Click to View Map Full Screen</a></p>
+
+							<!-- Map Script -->
+							<script>
+
+								//  CartoDB Positron basemap
+								var cartodb = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>. &copy; 2017 the <a href="#">Belfast Mobility Project</a> | Design by <a href="http://lunegeographic.co.uk">Lune Geographic</a>.'});
+
+								// Overlay layers (TMS)
+								var lyr = L.tileLayer('./gisdata/tiles/community/{z}/{x}/{y}.png', {tms: true, opacity: 0.7, attribution: ""});
+
+								// Map
+								var map = L.map('community_map', {
+									center: [54.6290536706, -5.95682733166],
+									zoom: 17,
+									minZoom: 13,
+									maxZoom: 17,
+									layers: [cartodb],
+									sleepTime: 750,		// time(ms) until map sleeps on mouseout
+									wakeTime: 1500,		// time(ms) until map wakes on mouseover
+								});
+
+								//add the layer
+								lyr.addTo(map);
+
+								// Fit to overlay bounds (SW and NE points with (lat, lon))
+								map.fitBounds([[54.5984808619, -5.9115522413], [54.6596264794, -6.00210242203]]);
+						
+							</script>
+						</div>
+						
+						<!-- Shared Spaces -->
+						<div class="6u 12u$(medium)">	
+												
+							<!-- Map div -->
+							<div class="map" id="shared_map"></div>
+							<p class="caption"><a target='_blank' href="./maps/sharing.html">Click to View Map Full Screen</a></p>
+
+							<!-- Map Script -->
+							<script>
+
+								//  CartoDB Positron basemap
+								var cartodb = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>. &copy; 2017 the <a href="#">Belfast Mobility Project</a> | Design by <a href="http://lunegeographic.co.uk">Lune Geographic</a>.'});
+
+								// Overlay layers (TMS)
+								var lyr = L.tileLayer('./gisdata/tiles/sharing/{z}/{x}/{y}.png', {tms: true, opacity: 0.7, attribution: ""});
+
+								// Map
+								var map = L.map('shared_map', {
+									center: [54.6290536706, -5.95682733166],
+									zoom: 17,
+									minZoom: 13,
+									maxZoom: 17,
+									layers: [cartodb],
+									sleepTime: 750,		// time(ms) until map sleeps on mouseout
+									wakeTime: 1500,		// time(ms) until map wakes on mouseover
+								});
+
+								//add the layer
+								lyr.addTo(map);
+
+								// Fit to overlay bounds (SW and NE points with (lat, lon))
+								map.fitBounds([[54.5984808619, -5.9115522413], [54.6596264794, -6.00210242203]]);
+						
+							</script>
+						</div>
+						
+						<div class="6u$ 12u$(medium)">					
+							<h2>Participatory GIS (PGIS) data on shared spaces.</h2>
+						</div>
+						
+						<!-- GPS Tracks -->
+						<div class="6u 12u$(medium)">							
+							<h2>GPS traces collected from 196 participants.</h2>
+						</div>
+						
+						<div class="6u$ 12u$(medium)">					
+							
+							<!-- Map div -->
+							<div class="map" id="gps_map"></div>
+							<p class="caption"><a target='_blank' href="./maps/gps.html">Click to View Map Full Screen</a></p>
+
+							<!-- Map Script -->
+							<script>
+
+								//  CartoDB Positron basemap
+								var cartodb = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>. &copy; 2017 the <a href="#">Belfast Mobility Project</a> | Design by <a href="http://lunegeographic.co.uk">Lune Geographic</a>.'});
+
+								// Overlay layers (TMS)
+								var lyr = L.tileLayer('./gisdata/tiles/gps/{z}/{x}/{y}.png', {tms: true, opacity: 0.7, attribution: ""});
+
+								// Map
+								var map = L.map('gps_map', {
+									center: [54.6290536706, -5.95682733166],
+									zoom: 17,
+									minZoom: 13,
+									maxZoom: 17,
+									layers: [cartodb],
+									sleepTime: 750,		// time(ms) until map sleeps on mouseout
+									wakeTime: 1500,		// time(ms) until map wakes on mouseover
+								});
+
+								//add the layer
+								lyr.addTo(map);
+
+								// Fit to overlay bounds (SW and NE points with (lat, lon))
+								map.fitBounds([[54.5984808619, -5.9115522413], [54.6596264794, -6.00210242203]]);
+						
+							</script>
+							
+						</div>
+						
+					</div>
+				</div>
+			</section>
+			
+			<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="copyright">
+						&copy; 2017 the <a href="#">Belfast Mobility Project</a> | Design by <a href="http://lunegeographic.co.uk">Lune Geographic</a> and <a href="http://templated.co" rel="nofollow">Templated</a>.
+					</div>
+				</div>
+			</footer>
+
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+	</body>
+</html>
