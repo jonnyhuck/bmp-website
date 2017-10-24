@@ -103,7 +103,8 @@ L.Polyline.include({
 				//are we finished?
 				if (this._snakingRings >= this._snakeLatLngs.length - 1 ) {
 					
-					console.log("snakepausestart")
+					console.log("here");
+					this.fire("snakepausestart");
 				
 					return this._snakeEnd();
 				} else {
