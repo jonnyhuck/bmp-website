@@ -102,9 +102,12 @@ L.Polyline.include({
 
 				//are we finished?
 				if (this._snakingRings >= this._snakeLatLngs.length - 1 ) {
-					
-					console.log("here");
-					this.fire("snakepausestart");
+
+					//TODO: WHY DOES THIS NOT FIRE?
+					//replicate functionality with global function for now
+// 					console.log("here");
+// 					this.fire("snakepausestart");
+					updatePanel();
 				
 					return this._snakeEnd();
 				} else {
