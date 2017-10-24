@@ -307,9 +307,19 @@
 										  container.style.backgroundColor = 'white'; 
 										}
 										container.onclick = function(){
-																							
-											//run the animation
-											snake(); 
+										
+// 											if(!running){																							
+												//run the animation
+												snake(); 
+// 											} else {
+// 												//stop the animation
+// 												map.removeLayer(route);
+// 												map.addLayer(route)
+// 												running = false;
+// 												imgCounter = 0;
+// 												document.getElementById("route37panel").src = "images/animation_splash.png";
+// 												document.getElementById("route37caption").innerHTML = "Click the button on the map to begin";
+// 											}
 										}
 									
 									//prevent clicks from being propagated to the map
@@ -372,7 +382,6 @@
 							function updatePanel(){
 									document.getElementById("route37panel").src = "images/37/" + images37[imgCounter];
 									document.getElementById("route37caption").innerHTML = captions37[imgCounter++];
-// 									console.log("playing: " + ["37","-",(imgCounter).toString()].join(""))
 									document.getElementById(["37","-",(imgCounter).toString()].join("")).play();
 							}
 
