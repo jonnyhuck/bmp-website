@@ -3,6 +3,9 @@
 ///// FIXME: Implement snakeOut()
 ///// FIXME: Implement layerGroup.snakeIn() / Out()
 
+//this will hold the active setTimeout object
+var activeTimeout;
+
 /**
  * These are the additions to Polyline, this is not used directly, but still seems to 
  *  control the smooth 'snaking' effect. Without it it just jumps section by section
@@ -149,7 +152,7 @@ L.Polyline.include({
 
 // add additional option for 'smooth' snaking speed
 L.Polyline.mergeOptions({
-	snakingSpeed: 200	// In pixels/sec
+	snakingSpeed: 40	// In pixels/sec
 });
 
 
@@ -222,7 +225,7 @@ L.LayerGroup.include({
 			
 			//add a timeout to the snakeend event on the current layer
 			currentLayer.once('snakeend', function(){	// 'once' means listener gets fired only once then removed
-				setTimeout(this._snakeNext.bind(this), pause);
+				activeTimeout = setTimeout(this._snakeNext.bind(this), pause);
 			}, this);
 			
 			//snakes the current layer
@@ -231,7 +234,7 @@ L.LayerGroup.include({
 		} else {
 		
 			//otherwise, just add the timeout on its own
-			setTimeout(this._snakeNext.bind(this), pause);
+			activeTimeout = setTimeout(this._snakeNext.bind(this), pause);
 		}
 		
 		//then fire snakepause
