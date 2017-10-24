@@ -58,7 +58,7 @@ L.Polyline.include({
 		// start snaking...?
 		this._snake();
 		
-		// doesn't do anything
+		// doesn't do anything as it doesn't propagate
 		this.fire('snakestart');
 		return this;
 	},
@@ -103,11 +103,8 @@ L.Polyline.include({
 				//are we finished?
 				if (this._snakingRings >= this._snakeLatLngs.length - 1 ) {
 
-					//TODO: WHY DOES THIS NOT FIRE?
-					//replicate functionality with global function for now
-// 					console.log("here");
-// 					this.fire("snakepausestart");
-					updatePanel();
+					// fire the snakepausestart event
+					this.fire("snakepausestart", null, true);
 				
 					return this._snakeEnd();
 				} else {

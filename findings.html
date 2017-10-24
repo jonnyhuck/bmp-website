@@ -346,8 +346,8 @@
 							]); 
 
 							// listener - every snake event show the next image and caption
-							route.on('snakestart snakeend', function(ev){
-// 							console.log(ev.type);
+							route.on('snakestart snakepausestart snakeend', function(ev){
+// 								console.log(ev.type);
 								
 								// switch the flag
 								if (ev.type === 'snakestart') {
@@ -361,14 +361,9 @@
 								}
 								
 								// move the picture, caption and audio file on
-// 								if (ev.type === 'snakepausestart') {
-// 									console.log(images37[imgCounter]);
-// 									// log the next image and caption into the panel
-// 									document.getElementById("route37panel").src = "images/37/" + images37[imgCounter];
-// 									document.getElementById("route37caption").innerHTML = captions37[imgCounter++];
-// // 											console.log("playing: " + ["31","-",(imgCounter+1).toString()].join(""))
-// // 											document.getElementById(["31","-",(imgCounter+1).toString()].join("")).play();
-// 								}
+								if (ev.type === 'snakepausestart') {
+									updatePanel();
+								}
 							});
 							
 							/**
@@ -377,7 +372,7 @@
 							function updatePanel(){
 									document.getElementById("route37panel").src = "images/37/" + images37[imgCounter];
 									document.getElementById("route37caption").innerHTML = captions37[imgCounter++];
-									console.log("playing: " + ["37","-",(imgCounter).toString()].join(""))
+// 									console.log("playing: " + ["37","-",(imgCounter).toString()].join(""))
 									document.getElementById(["37","-",(imgCounter).toString()].join("")).play();
 							}
 
