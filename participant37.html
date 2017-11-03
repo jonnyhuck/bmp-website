@@ -24,7 +24,7 @@
 		</style>
 		
 	</head>
-	<body class="subpage">
+	<body>
 	
 		<!-- Audio elements for the interview excerpts -->
 		<audio id="37-1"><source src="audio/37/37.1.wav" type="audio/wav">Your browser does not support the audio element.</audio>
@@ -69,25 +69,9 @@
 				onAdd: function (m) {	//construct the button
 					var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
 						container.style.backgroundColor = 'white';     
-						container.innerHTML = //"Click to Run Animation";
-							'<button id="btn_bk" onclick="skipBk()" disabled="true"><i class="fa fa-fast-backward fa-lg"></i></button><button id="btn_pa" onclick="pause()" disabled="true"><i class="fa fa-pause fa-lg"></i></button><button id="btn_pl" onclick="resume()"><i class="fa fa-play fa-lg"></i></button><button id="btn_st" onclick="skipBk()" disabled="true"><i class="fa fa-stop fa-lg"></i></button><button id="btn_fw" onclick="skipFwd()" disabled="true"><i class="fa fa-fast-forward fa-lg"></i></button>';
+						container.innerHTML = '<button id="btn_bk" onclick="skipBk()" disabled="true"><i class="fa fa-fast-backward fa-lg"></i></button><button id="btn_pa" onclick="pause()" disabled="true"><i class="fa fa-pause fa-lg"></i></button><button id="btn_pl" onclick="play()"><i class="fa fa-play fa-lg"></i></button><button id="btn_st" onclick="stop()" disabled="true"><i class="fa fa-stop fa-lg"></i></button><button id="btn_fw" onclick="skipFwd()" disabled="true"><i class="fa fa-fast-forward fa-lg"></i></button>';
 						container.style.padding = "5px";
 						container.style.color = "black";
-						container.style.cursor = "pointer";
-// 						container.onmouseover = function(){
-// 							container.style.backgroundColor = '#eee'; 
-// 						}
-// 						container.onmouseout = function(){
-// 						  container.style.backgroundColor = '#fff'; 
-// 						}
-						container.onclick = function(){
-				
-							//behaviour depends on if the animation is already running
-							if(!running){																																
-								//run the animation
-								snake(); 
-							}
-						}
 			
 					//prevent clicks from being propagated to the map
 					L.DomEvent.disableClickPropagation(container);
@@ -95,7 +79,7 @@
 				}
 			});
 	
-			//add button
+			//add buttons panel to the map
 			map2.addControl(new customControl());
 
 			//list of images, captions and initialise counter to go with them
@@ -132,25 +116,54 @@
 			map2.addLayer(route);
 
 			// add listener to the route - every snake event show the next image and caption
-			route.on('snakestart snakepausestart snakeend', function(ev){
-				//console.log(ev.type);
+			route.on('snakestart snakepausestart snakepauseend snakeend', function(ev){
+// 				console.log(ev.type);
 		
-				// switch the flag
+				// when the snake animation begins
 				if (ev.type === 'snakestart') {
+				
+					//set flag and reset image
 					running = true;
 					document.getElementById("route37panel").src = "images/animation_splash.png";
 					document.getElementById("route37caption").innerHTML = "Click the button on the map to begin";
+				
+				// when the snake animation ends
 				} else if (ev.type === 'snakeend') {
+					
+					//set flag and reset image
 					running = false;
 					document.getElementById("route37panel").src = "images/animation_splash.png";
 					document.getElementById("route37caption").innerHTML = "Click the button on the map to begin";
-				}
-		
-				// move the picture, caption and audio file on
-				if (ev.type === 'snakepausestart') {
+					
+					// reset the buttons - disabled whilst moving
+					document.getElementById('btn_bk').disabled = true;
+					document.getElementById('btn_pa').disabled = true;
+					document.getElementById('btn_pl').disabled = false;
+					document.getElementById('btn_pl').disabled = true;
+					document.getElementById('btn_fw').disabled = true;
+				
+				// when the snake arrives at a pause, BEFORE the pause
+				} else if (ev.type === 'snakepausestart') {
+				
+					// move the picture, caption and audio file on
 					document.getElementById("route37panel").src = "images/37/" + images37[imgCounter];
 					document.getElementById("route37caption").innerHTML = captions37[imgCounter++];
 					document.getElementById(["37","-",(imgCounter).toString()].join("")).play();
+					
+					// set the buttons
+					document.getElementById('btn_bk').disabled = false;
+					document.getElementById('btn_pa').disabled = false;
+					document.getElementById('btn_pl').disabled = true;
+					document.getElementById('btn_fw').disabled = false;
+				
+				//when the snake leaves a pause, AFTER the pause
+				} else if (ev.type === 'snakepauseend') {
+				
+					// set the buttons - disabled whilst moving
+					document.getElementById('btn_bk').disabled = true;
+					document.getElementById('btn_pa').disabled = true;
+					document.getElementById('btn_pl').disabled = true;
+					document.getElementById('btn_fw').disabled = true;
 				}
 			});
 
@@ -179,44 +192,31 @@
 			 * skip the animation forward
 			 */
 			function skipFwd(){
-				console.log("skipFwd");
 		
-				//stop the previous audio
-				document.getElementById(["37","-",(imgCounter).toString()].join("")).pause();
-		
-				//increment the counter
-				//TODO: Can this be the internal counter in the library?
-				imgCounter++;
-		
-				//update the panel etc
-				document.getElementById("route37panel").src = "images/37/" + images37[imgCounter];
-				document.getElementById("route37caption").innerHTML = captions37[imgCounter++];
-				document.getElementById(["37","-",(imgCounter).toString()].join("")).play();
+				//stop and rewind the previous audio
+				var aud = document.getElementById(["37","-",(imgCounter).toString()].join(""));
+				aud.pause();
+				aud.currentTime = 0;
 		
 				//skip the animation forward
-				route.snakeSkipForward();
+				route.snakeSkipForward();	//fires snakepausestart event 
 			}
 	
 			/**
 			 * skip the animation backward
 			 */
 			function skipBk(){
-				console.log("skipBk");
+			
+				//stop and rewind the previous audio
+				var aud = document.getElementById(["37","-",(imgCounter).toString()].join(""));
+				aud.pause();
+				aud.currentTime = 0;
 		
-				//stop the previous audio
-				document.getElementById(["37","-",(imgCounter).toString()].join("")).pause();
-		
-				//increment the counter
-				//TODO: Can this be the internal counter in the library?
+				//decrement the counter
 				imgCounter--;
 		
-				//update the panel etc
-				document.getElementById("route37panel").src = "images/37/" + images37[imgCounter];
-				document.getElementById("route37caption").innerHTML = captions37[imgCounter++];
-				document.getElementById(["37","-",(imgCounter).toString()].join("")).play();
-		
 				//skip the animation back
-				route.snakeSkipBack();
+				route.snakeSkipBack();	//fires snakepausestart event 
 			}
 	
 			/**
@@ -228,21 +228,43 @@
 				document.getElementById('btn_bk').disabled = true;
 				document.getElementById('btn_pa').disabled = true;
 				document.getElementById('btn_pl').disabled = false;
-				document.getElementById('btn_st').disabled = true;
 				document.getElementById('btn_fw').disabled = true;
+				
+				//stop the audio
+				document.getElementById(["37","-",(imgCounter).toString()].join("")).pause();
+				
+				//pause the animation
+				route.snakePause();	//fires snakepausestart event 
 			}
 	
 			/**
 			 * resume the animation
 			 */
-			function resume() {
-		
-				// de/re-activate buttons
-				document.getElementById('btn_bk').disabled = false;
-				document.getElementById('btn_pa').disabled = false;
-				document.getElementById('btn_pl').disabled = true;
-				document.getElementById('btn_st').disabled = false;
-				document.getElementById('btn_fw').disabled = false;
+			function play() {
+				
+				if (!running){
+				
+					//run the animation
+					snake();
+				
+				} else {
+					// de/re-activate buttons
+					document.getElementById('btn_bk').disabled = false;
+					document.getElementById('btn_pa').disabled = false;
+					document.getElementById('btn_pl').disabled = true;
+					document.getElementById('btn_fw').disabled = false;
+					
+					//TODO: Can I use this rather than the timings...?
+				
+					//continue the audio
+					var aud = document.getElementById(["37","-",(imgCounter).toString()].join(""));
+					aud.play();
+					
+					//continue the animation after the audio completes
+					aud.onended = function(){
+						route.snakeResume();
+					};
+				}
 			} 
 	
 			/**
@@ -250,12 +272,8 @@
 			 */
 			function stop() {
 		
-				// de/re-activate buttons
-				document.getElementById('btn_bk').disabled = true;
-				document.getElementById('btn_pa').disabled = true;
-				document.getElementById('btn_pl').disabled = false;
-				document.getElementById('btn_st').disabled = true;
-				document.getElementById('btn_fw').disabled = true;
+				//just refresh the page (as designed to be viewed through iframe)
+				location.reload(); 
 			} 
 	
 			/**
@@ -267,7 +285,6 @@
 				}
 				return latlngs
 			}
-			
 		</script>
 	</body>
 </html>

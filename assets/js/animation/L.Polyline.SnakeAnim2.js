@@ -228,7 +228,7 @@ L.LayerGroup.include({
 			
 			//add a timeout to the snakeend event on the current layer
 			currentLayer.once('snakeend', function(){	// 'once' means listener gets fired only once then removed
-				activeTimeout = setTimeout(this._snakeNext.bind(this), pause);
+				this._activeTimeout = setTimeout(this._snakeNext.bind(this), pause);
 			}, this);
 			
 			//snakes the current layer
@@ -237,7 +237,7 @@ L.LayerGroup.include({
 		} else {
 		
 			//otherwise, just add the timeout on its own
-			activeTimeout = setTimeout(this._snakeNext.bind(this), pause);
+			this._activeTimeout = setTimeout(this._snakeNext.bind(this), pause);
 		}
 		
 		//then fire snakepause
@@ -247,15 +247,15 @@ L.LayerGroup.include({
 	
 	
 	/**
-	 * JJH: Skip to last layer
+	 * JJH: Skip to previous layer
 	 */
 	snakeSkipBack: function() {
 	
 		// get rid of the timeout
-		clearTimeout(this.activeTimeout);
-		
+		clearTimeout(this._activeTimeout);
+
 		//step back two (snakeNext will advance us one)
-		this._snakingLayersDone -= 2;
+		this._snakingLayersDone--;
 		
 		//pop the current layer off the layerGroup
 		var groupLayers = this.getLayers();
@@ -273,7 +273,7 @@ L.LayerGroup.include({
 	snakeSkipForward: function() {
 		
 		// get rid of the timeout
-		clearTimeout(this.activeTimeout);
+		clearTimeout(this._activeTimeout);
 
 		// play again...
 		this._snakeNext();
@@ -287,7 +287,7 @@ L.LayerGroup.include({
 	snakePause: function() {
 		
 		// get rid of the timeout
-		clearTimeout(this.activeTimeout);
+		clearTimeout(this._activeTimeout);
 	},
 	
 	
