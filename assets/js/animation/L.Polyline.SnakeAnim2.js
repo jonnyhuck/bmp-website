@@ -282,7 +282,6 @@ L.LayerGroup.include({
 	
 	/**
 	 * JJH Skip to next layer
-	 * TODO: NEEDS A FLAG!!!
 	 */
 	snakePause: function() {
 		
