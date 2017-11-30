@@ -135,7 +135,8 @@ L.Polyline.include({
 		this._latlngs[ this._snakingRings ].push(headLatLng);
 
 		this.setLatLngs(this._latlngs);
-		this.fire('snakepauseend');
+// 		this.fire('snakepauseend');
+// 		console.log('layer');
 		L.Util.requestAnimFrame(this._snake, this);
 	},
 	
@@ -183,7 +184,7 @@ L.LayerGroup.include({
 		this._snakingLayers = [];
 		this._snakingLayersDone = 0;
 		
-		// store all of the layes in the group in an array...?
+		// store all of the layers in the group in an array...?
 		var keys = Object.keys(this._layers);
 		for (var i in keys) {
 			var key = keys[i];
