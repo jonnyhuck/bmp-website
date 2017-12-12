@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style> 
+	.bar { fill: #b3cde3; }
+	small {font: 11px sans-serif; }
+</style>
+<body>    	
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+var data = [
+	{"question":"My community worries about negative contact","value":3.4},
+	{"question":"My community avoids certain areas","value":3},
+	{"question":"My community feels the city centre is now more open and incusive","value":4.1},
+	{"question":"My community feels they belong","value":4.2},
+	{"question":"My community is free to enjoy the city centre","value":4.2},
+	{"question":"City centre is shared space","value":4.1}];
+
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 10, bottom: 30, left: 310},
+    width = 500 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+
+// set the ranges
+var y = d3.scaleBand()
+          .range([height, 0])
+          .padding(0.1);
+
+var x = d3.scaleLinear()
+          .range([0, width]);
+          
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  	.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// format the data
+data.forEach(function(d) {
+	d.sales = +d.sales;
+});
+
+// Scale the range of the data in the domains
+x.domain([1, 5]);
+y.domain(data.map(function(d) { return d.question; }));
+
+// append the rectangles for the bar chart
+svg.selectAll(".bar")
+	.data(data)
+	.enter().append("rect")
+	.attr("class", "bar")
+	.attr("width", function(d) {return x(d.value); } )
+	.attr("y", function(d) { return y(d.question); })
+	.attr("height", y.bandwidth());
+
+// add the x Axis
+svg.append("g")
+	.attr("transform", "translate(0," + height + ")")
+	.call(d3.axisBottom(x));
+
+// add the y Axis
+svg.append("g")
+	.call(d3.axisLeft(y));
+</script>
+<br/><small><strong>Note:</strong> attitudes are measured on a 5 point scale, with higher scores indicating greater agreement with the statement.</small>
+</body>

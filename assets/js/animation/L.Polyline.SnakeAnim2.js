@@ -306,5 +306,5 @@ L.LayerGroup.include({
 
 //add the default pause timer value to the LayerGroup options
 L.LayerGroup.mergeOptions({
-	snakingPause: 2000
+	snakingPause: 0
 });
