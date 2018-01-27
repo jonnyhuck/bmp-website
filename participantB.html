@@ -36,6 +36,9 @@
 		<audio id="51-7"><source src="audio/51/51.7.wav" type="audio/wav"></audio>
 		<audio id="51-8"><source src="audio/51/51.8.wav" type="audio/wav"></audio>
 		
+		
+		
+		
 		<!-- The Map Panel -->
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
@@ -51,6 +54,30 @@
 
 		<!-- Code to run the animation -->
 		<script>
+		
+			/* Detect browser by Ducktyping*/
+			// Opera 8.0+
+			if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
+				var browser = 'opera';
+			// Firefox 1.0+
+			} else if (typeof InstallTrigger !== 'undefined') {
+				var browser = 'firefox';
+			// Safari 3.0+ "[object HTMLElementConstructor]" 
+			} else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) {
+				var browser = 'safari';
+			// Internet Explorer 6-11
+			} else if (/*@cc_on!@*/false || !!document.documentMode) {
+				var browser = 'ie';
+			// Edge 20+
+			} else if (!isIE && !!window.StyleMedia) {
+				var browser = 'edge';
+			// Chrome 1+
+			} else if (!!window.chrome && !!window.chrome.webstore) {
+				var browser = 'chrome';
+			// Blink engine detection
+			} else if ((isChrome || isOpera) && !!window.CSS) {
+				var browser = 'blink';
+			}	
 
 			//flag for whether animation is already running51 or not
 			var running51 = false;
@@ -90,6 +117,13 @@
 			var captions51 = ["Loyalist graffiti","Wishing Well Family Centre","Alliance Avenue peace wall","Ardoyne Road","'Catholic' playground on the Ardoyne Road","Ardoyne shops","Wheatfield Primary School","The Jolly Roger Complex"];
 			var points = [[54.620065895994372, -5.964148157623276],[54.620205913914411, -5.957860593832576],[54.619031902590734, -5.964389986999842],[54.616791493406474, -5.966975701103117],[54.615768188559954, -5.966603655908401],[54.61527268433494, -5.966306019752628],[54.619882794910367, -5.966361826531836]];
 			var imgCounter = 0;
+			
+			//preload images (speeds up user experience on slower machines)
+			var preloadedImages = new Array();
+			for (var i = 0; i < images51.length; i++){
+				preloadedImages[i] = new Image();
+				preloadedImages[i].src = images51[i];
+			}
 
 			// load the route into a LayerGroup with pauses that align with the audio lengths
 			var route = L.featureGroup([
@@ -147,7 +181,7 @@
 				// when the snake arrives at a pause, BEFORE the pause
 				} else if (ev.type === 'snakepausestart') {
 				
-						console.log(imgCounter);
+// 						console.log(imgCounter);
 				
 						//avoid a crash if the audio file can't be found
 						if (document.getElementById("route51panel").src = "images/51/" + images51[imgCounter]){							

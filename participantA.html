@@ -51,6 +51,30 @@
 
 		<!-- Code to run the animation -->
 		<script>
+		
+			/* Detect browser by Ducktyping*/
+			// Opera 8.0+
+			if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
+				var browser = 'opera';
+			// Firefox 1.0+
+			} else if (typeof InstallTrigger !== 'undefined') {
+				var browser = 'firefox';
+			// Safari 3.0+ "[object HTMLElementConstructor]" 
+			} else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) {
+				var browser = 'safari';
+			// Internet Explorer 6-11
+			} else if (/*@cc_on!@*/false || !!document.documentMode) {
+				var browser = 'ie';
+			// Edge 20+
+			} else if (!isIE && !!window.StyleMedia) {
+				var browser = 'edge';
+			// Chrome 1+
+			} else if (!!window.chrome && !!window.chrome.webstore) {
+				var browser = 'chrome';
+			// Blink engine detection
+			} else if ((isChrome || isOpera) && !!window.CSS) {
+				var browser = 'blink';
+			}	
 
 			//flag for whether animation is already running or not
 			var running = false;
@@ -89,7 +113,13 @@
 			var images37 = ["1TwaddellRoundabout.jpg","2CommunityMural.jpg","3EvertonComplex.jpg","4AllianceAveSecurityCamera.jpg","5EntrancetoGlenbryn.jpg",	"6KATPostBox.jpg","7VirginMaryMural.jpg","8ArdileaCloseMural.jpg"];
 			var captions37 = ["The Twaddell Roundabout","A community mural","The Everton Complex","A security camera near the Alliance Avenue peace wall","The entrance to Glenbryn","Sectarian graffiti on a postbox","A Virgin Mary mural","Ardilea Close murals"];
 			var imgCounter = 0;
-
+			
+			//preload images (speeds up user experience on slower machines)
+			var preloadedImages = new Array();
+			for (var i = 0; i < images37.length; i++){
+				preloadedImages[i] = new Image();
+				preloadedImages[i].src = images37[i];
+			}
 
 			// load the route into a LayerGroup with pauses that align with the audio lengths
 			var route = L.featureGroup([
