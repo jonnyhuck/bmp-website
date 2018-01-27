@@ -15,6 +15,7 @@
 		<script src="assets/js/animation/L.Polyline.SnakeAnim2.js"></script>
 		<script src="assets/js/extramarkers/js/leaflet.extra-markers.min.js"></script>
 		<script src="assets/js/Leaflet.Sleep.js"></script>
+		<script src="assets/js/bowser.min.js"></script>
 		
 		<!-- More CSS for Map -->
 		<style>
@@ -55,15 +56,9 @@
 		<!-- Code to run the animation -->
 		<script>
 		
-			// detect browser by Ducktyping, redirect if necessary
-			if
-				// Safari 3.0+ "[object HTMLElementConstructor]"  
-				(/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) || 
-				// Internet Explorer 6-11
-				(/*@cc_on!@*/false || !!document.documentMode) ||
-				// Edge 20+
-				 (!isIE && !!window.StyleMedia) {
-				window.location.replace("participantB_simple.html");	 
+			//redirect if crappy browser	
+			if (bowser.name !== 'Chrome' && bowser.name != 'Firefox'){
+				window.location.replace("participantB_simple.html");
 			}
 
 			//flag for whether animation is already running51 or not
