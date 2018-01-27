@@ -8,9 +8,12 @@
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
 		
 		<!-- CSS and scripts for maps -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" />
+		<link rel="stylesheet" href="assets/js/extramarkers/css/leaflet.extra-markers.min.css"/>
 		<link href="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css" rel="stylesheet" type="text/css" />
 		<script src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
 		<script src="assets/js/animation/L.Polyline.SnakeAnim2.js"></script>
+		<script src="assets/js/extramarkers/js/leaflet.extra-markers.min.js"></script>
 		<script src="assets/js/Leaflet.Sleep.js"></script>
 		
 		<!-- More CSS for Map -->
@@ -36,9 +39,6 @@
 		<audio id="51-7"><source src="audio/51/51.7.wav" type="audio/wav"></audio>
 		<audio id="51-8"><source src="audio/51/51.8.wav" type="audio/wav"></audio>
 		
-		
-		
-		
 		<!-- The Map Panel -->
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
@@ -57,27 +57,27 @@
 		
 			/* Detect browser by Ducktyping*/
 			// Opera 8.0+
-			if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
-				var browser = 'opera';
-			// Firefox 1.0+
-			} else if (typeof InstallTrigger !== 'undefined') {
-				var browser = 'firefox';
-			// Safari 3.0+ "[object HTMLElementConstructor]" 
-			} else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) {
-				var browser = 'safari';
-			// Internet Explorer 6-11
-			} else if (/*@cc_on!@*/false || !!document.documentMode) {
-				var browser = 'ie';
-			// Edge 20+
-			} else if (!isIE && !!window.StyleMedia) {
-				var browser = 'edge';
-			// Chrome 1+
-			} else if (!!window.chrome && !!window.chrome.webstore) {
-				var browser = 'chrome';
-			// Blink engine detection
-			} else if ((isChrome || isOpera) && !!window.CSS) {
-				var browser = 'blink';
-			}	
+// 			if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
+// 				var browser = 'opera';
+// 			// Firefox 1.0+
+// 			} else if (typeof InstallTrigger !== 'undefined') {
+// 				var browser = 'firefox';
+// 			// Safari 3.0+ "[object HTMLElementConstructor]" 
+// 			} else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) {
+// 				var browser = 'safari';
+// 			// Internet Explorer 6-11
+// 			} else if (/*@cc_on!@*/false || !!document.documentMode) {
+// 				var browser = 'ie';
+// 			// Edge 20+
+// 			} else if (!isIE && !!window.StyleMedia) {
+// 				var browser = 'edge';
+// 			// Chrome 1+
+// 			} else if (!!window.chrome && !!window.chrome.webstore) {
+// 				var browser = 'chrome';
+// 			// Blink engine detection
+// 			} else if ((isChrome || isOpera) && !!window.CSS) {
+// 				var browser = 'blink';
+// 			}	
 
 			//flag for whether animation is already running51 or not
 			var running51 = false;
@@ -127,22 +127,78 @@
 
 			// load the route into a LayerGroup with pauses that align with the audio lengths
 			var route = L.featureGroup([
+				L.marker([54.620065895994372,-5.964148157623276], {icon: L.ExtraMarkers.icon({
+					icon: 'fa-number',
+					number: '1',
+					markerColor: 'cyan',
+					shape: 'circle',
+					prefix: 'fa'
+				})}),
 				L.polyline(lnglat2latlng([[-5.96425977118169,54.620087437244194],[-5.964148157623276,54.620065895994372]])
 					, {snakingPause: 60 * 1000, weight: 3, dashArray: "5 5"}),
 				L.polyline(lnglat2latlng([[-5.964148157623276,54.620065895994372],[-5.960836955390303,54.619096527948287],[-5.960427705676116,54.619085757062493],[-5.960148671780078,54.619085757062493],[-5.959888240143777,54.619128840588559],[-5.959665013026949,54.61916115320318],[-5.95934877461144,54.619215007503854],[-5.959013933936196,54.619268861733254],[-5.958865115858308,54.619333486714432],[-5.95867909326095,54.619441194788315],[-5.957860593832576,54.620205913914411],[-5.957860593832576,54.620205913914411]])
 					, {snakingPause: 67 * 1000, weight: 3, dashArray: "5 5"}),
+				L.marker([54.620205913914411,-5.957860593832576], {icon: L.ExtraMarkers.icon({
+					icon: 'fa-number',
+					number: '2',
+					markerColor: 'cyan',
+					shape: 'circle',
+					prefix: 'fa'
+				})}),
 				L.polyline(lnglat2latlng([[-5.957860593832576,54.620205913914411],[-5.95867909326095,54.619441194788315],[-5.958865115858308,54.619333486714432],[-5.959013933936196,54.619268861733254],[-5.95934877461144,54.619215007503854],[-5.959665013026949,54.61916115320318],[-5.959888240143777,54.619128840588559],[-5.960148671780078,54.619085757062493],[-5.960427705676116,54.619085757062493],[-5.960836955390303,54.619096527948287],[-5.963757510168824,54.619979730881006],[-5.963943532766182,54.619764317299278],[-5.963608692090938,54.619204236649416],[-5.964389986999842,54.619031902590734]])
 					, {snakingPause: 101 * 1000, weight: 3, dashArray: "5 5"}),
+				L.marker([54.619031902590734,-5.964389986999842], {icon: L.ExtraMarkers.icon({
+					icon: 'fa-number',
+					number: '3',
+					markerColor: 'cyan',
+					shape: 'circle',
+					prefix: 'fa'
+				})}),
 				L.polyline(lnglat2latlng([[-5.964389986999842,54.619031902590734],[-5.967515166635456,54.618450269753986],[-5.966975701103117,54.616791493406474]])
 					, {snakingPause: 77 * 1000, weight: 3, dashArray: "5 5"}),
+				L.marker([54.616791493406474,-5.966975701103117], {icon: L.ExtraMarkers.icon({
+					icon: 'fa-number',
+					number: '4',
+					markerColor: 'cyan',
+					shape: 'circle',
+					prefix: 'fa'
+				})}),
 				L.polyline(lnglat2latlng([[-5.966975701103117,54.616791493406474],[-5.966603655908401,54.615768188559954]])
 					, {snakingPause: 47 * 1000, weight: 3, dashArray: "5 5"}),
+				L.marker([54.615768188559954,-5.966603655908401], {icon: L.ExtraMarkers.icon({
+					icon: 'fa-number',
+					number: '5',
+					markerColor: 'cyan',
+					shape: 'circle',
+					prefix: 'fa'
+				})}),
 				L.polyline(lnglat2latlng([[-5.966603655908401,54.615768188559954],[-5.966306019752628,54.61527268433494]])
 					, {snakingPause: 15 * 1000, weight: 3, dashArray: "5 5"}),
+				L.marker([54.61527268433494,-5.966306019752628], {icon: L.ExtraMarkers.icon({
+					icon: 'fa-number',
+					number: '6',
+					markerColor: 'cyan',
+					shape: 'circle',
+					prefix: 'fa'
+				})}),
 				L.polyline(lnglat2latlng([[-5.966306019752628,54.61527268433494],[-5.966082792635799,54.614874122210558],[-5.965971179077384,54.614744857980583],[-5.965915372298177,54.614454011961918],[-5.969673028764808,54.61686689379831],[-5.967384950817305,54.618094823371969],[-5.967515166635456,54.618450269753986],[-5.967887211830171,54.619635068602818],[-5.966361826531836,54.619882794910367]])
 					, {snakingPause: 27 * 1000, weight: 3, dashArray: "5 5"}),
+				L.marker([54.619882794910367,-5.966361826531836], {icon: L.ExtraMarkers.icon({
+					icon: 'fa-number',
+					number: '7',
+					markerColor: 'cyan',
+					shape: 'circle',
+					prefix: 'fa'
+				})}),
 				L.polyline(lnglat2latlng([[-5.966361826531836,54.619882794910367],[-5.965227088687952,54.620108978482619],[-5.965078270610066,54.620356701904818],[-5.963757510168824,54.619979730881006]])
 					, {snakingPause: 32 * 1000, weight: 3, dashArray: "5 5"}),
+				L.marker([54.619979730881006,-5.963757510168824], {icon: L.ExtraMarkers.icon({
+					icon: 'fa-number',
+					number: '8',
+					markerColor: 'cyan',
+					shape: 'circle',
+					prefix: 'fa'
+				})}),
 			]); 
 			
 			// zoom to the route
@@ -150,13 +206,30 @@
 
 			// add the route to the map
 			map3.addLayer(route);
+			
+			//add the markers
+			var markers = [];
+			for (var j=0; j < locations37.length; j++){
+				markers.push(L.marker(locations37[j], {icon: L.ExtraMarkers.icon({
+					icon: 'fa-number',
+					number: j+1,
+					markerColor: 'cyan',
+					shape: 'circle',
+					prefix: 'fa'
+				})}));
+			}
+			var fg = L.featureGroup(markers);
+			fg.addTo(map2);
 
 			// add listener to the route - every snake event show the next image and caption
 			route.on('snakestart snakepausestart snakepauseend snakeend', function(ev){
-// 				console.log(ev.type);
+				console.log(ev.type);
 		
 				// when the snake animation begins
 				if (ev.type === 'snakestart') {
+				
+					//get rid of the markers
+					fg.removeFrom(map2);
 				
 					//set flag and reset image
 					running51 = true;
@@ -170,18 +243,21 @@
 					running51 = false;
 					document.getElementById("route51panel").src = "images/animation_splash.png";
 					document.getElementById("route51caption").innerHTML = "Click the button on the map to begin";
-					
+										
 					// reset the buttons - disabled whilst moving
-					document.getElementById('btn_bk').disabled = true;
-					document.getElementById('btn_pa').disabled = true;
-					document.getElementById('btn_pl').disabled = false;
-					document.getElementById('btn_pl').disabled = true;
-					document.getElementById('btn_fw').disabled = true;
+// 					document.getElementById('btn_bk').disabled = true;
+// 					document.getElementById('btn_pa').disabled = true;
+// 					document.getElementById('btn_pl').disabled = false;
+// 					document.getElementById('btn_pl').disabled = true;
+// 					document.getElementById('btn_fw').disabled = true;
+
+					//reset not working - just force it
+					location.reload(); 
 				
 				// when the snake arrives at a pause, BEFORE the pause
 				} else if (ev.type === 'snakepausestart') {
 				
-// 						console.log(imgCounter);
+						console.log(imgCounter);
 				
 						//avoid a crash if the audio file can't be found
 						if (document.getElementById("route51panel").src = "images/51/" + images51[imgCounter]){							

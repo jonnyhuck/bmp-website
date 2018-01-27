@@ -8,9 +8,12 @@
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
 		
 		<!-- CSS and scripts for maps -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" />
+		<link rel="stylesheet" href="assets/js/extramarkers/css/leaflet.extra-markers.min.css"/>
 		<link href="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css" rel="stylesheet" type="text/css" />
 		<script src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
 		<script src="assets/js/animation/L.Polyline.SnakeAnim2.js"></script>
+		<script src="assets/js/extramarkers/js/leaflet.extra-markers.min.js"></script>
 		<script src="assets/js/Leaflet.Sleep.js"></script>
 		
 		<!-- More CSS for Map -->
@@ -54,27 +57,27 @@
 		
 			/* Detect browser by Ducktyping*/
 			// Opera 8.0+
-			if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
-				var browser = 'opera';
-			// Firefox 1.0+
-			} else if (typeof InstallTrigger !== 'undefined') {
-				var browser = 'firefox';
-			// Safari 3.0+ "[object HTMLElementConstructor]" 
-			} else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) {
-				var browser = 'safari';
-			// Internet Explorer 6-11
-			} else if (/*@cc_on!@*/false || !!document.documentMode) {
-				var browser = 'ie';
-			// Edge 20+
-			} else if (!isIE && !!window.StyleMedia) {
-				var browser = 'edge';
-			// Chrome 1+
-			} else if (!!window.chrome && !!window.chrome.webstore) {
-				var browser = 'chrome';
-			// Blink engine detection
-			} else if ((isChrome || isOpera) && !!window.CSS) {
-				var browser = 'blink';
-			}	
+// 			if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
+// 				var browser = 'opera';
+// 			// Firefox 1.0+
+// 			} else if (typeof InstallTrigger !== 'undefined') {
+// 				var browser = 'firefox';
+// 			// Safari 3.0+ "[object HTMLElementConstructor]" 
+// 			} else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) {
+// 				var browser = 'safari';
+// 			// Internet Explorer 6-11
+// 			} else if (/*@cc_on!@*/false || !!document.documentMode) {
+// 				var browser = 'ie';
+// 			// Edge 20+
+// 			} else if (!isIE && !!window.StyleMedia) {
+// 				var browser = 'edge';
+// 			// Chrome 1+
+// 			} else if (!!window.chrome && !!window.chrome.webstore) {
+// 				var browser = 'chrome';
+// 			// Blink engine detection
+// 			} else if ((isChrome || isOpera) && !!window.CSS) {
+// 				var browser = 'blink';
+// 			}	
 
 			//flag for whether animation is already running or not
 			var running = false;
@@ -112,6 +115,7 @@
 			//list of images, captions and initialise counter to go with them
 			var images37 = ["1TwaddellRoundabout.jpg","2CommunityMural.jpg","3EvertonComplex.jpg","4AllianceAveSecurityCamera.jpg","5EntrancetoGlenbryn.jpg",	"6KATPostBox.jpg","7VirginMaryMural.jpg","8ArdileaCloseMural.jpg"];
 			var captions37 = ["The Twaddell Roundabout","A community mural","The Everton Complex","A security camera near the Alliance Avenue peace wall","The entrance to Glenbryn","Sectarian graffiti on a postbox","A Virgin Mary mural","Ardilea Close murals"];
+			var locations37 = [[54.613636470068577,-5.964519071327481],[54.615117706727098,-5.966012943584127],[54.616236945593059,-5.966774294269313],[54.617259030397911,-5.967135968605134],[54.617858459431574,-5.967303701630441],[54.618447257075374,-5.967502884597994],[54.615864375259754,-5.961343937574979],[54.6151897942256,-5.951024425275779]];
 			var imgCounter = 0;
 			
 			//preload images (speeds up user experience on slower machines)
@@ -138,7 +142,7 @@
 				L.polyline(lnglat2latlng([[-5.967502884597994,54.618447257075374],[-5.967896008876059,54.619620274408632],[-5.967502884597994,54.618447257075374],[-5.967303701630441,54.617858459431574],[-5.967135968605134,54.617259030397911],[-5.962826016103281,54.618064084319151],[-5.962493170881189,54.617550399537443],[-5.962178671458737,54.617076923626236],[-5.961848447065162,54.616609512515332],[-5.961511670600287,54.61611022653458],[-5.961343937574979,54.615864375259754]])
 					, {snakingPause: 117 * 1000, weight: 3, dashArray: "5 5"}),
 				L.polyline(lnglat2latlng([[-5.961343937574979,54.615864375259754],[-5.960578655647013,54.614694284947596],[-5.958155699679874,54.615195105930965],[-5.957495250892724,54.615349903897076],[-5.956591065053177,54.615334727651913],[-5.956622514995422,54.614921931613189],[-5.954744691360532,54.614873367098049],[-5.954419708623998,54.614900684644944],[-5.954524541764815,54.615307410396383],[-5.954545508392979,54.615393156164707],[-5.954603166620428,54.615602587547258],[-5.954650341533797,54.61576952483383],[-5.954744691360532,54.615933426230775],[-5.954807591245022,54.616267297404782],[-5.954603166620428,54.61629157883786],[-5.954246733941649,54.615906109377129],[-5.954178592400119,54.615915214997045],[-5.954173350743078,54.615991095083814],[-5.954183834057159,54.616045728658669],[-5.954183834057159,54.616076080613006],[-5.954115692515629,54.616100362160189],[-5.953989892746646,54.616042693461992],[-5.953861472149147,54.616085186194894],[-5.952986115423323,54.616458513298035],[-5.952881282282506,54.616501005596739],[-5.95279217411281,54.616507075921504],[-5.95272927422832,54.616510111083549],[-5.95266113268679,54.616504040759239],[-5.952152691953825,54.616355317530747],[-5.951990200585559,54.616358352704104],[-5.951885367444741,54.616358352704104],[-5.951852607088236,54.616367458222832],[-5.951658665777724,54.616273367764407],[-5.951517141037622,54.616164101152577],[-5.950437359687203,54.615289957695744],[-5.950882900535675,54.615083559972724],[-5.951024425275779,54.6151897942256]])
-					, {snakingPause: 106 * 1000, weight: 3, dashArray: "5 5"})
+					, {snakingPause: 106 * 1000, weight: 3, dashArray: "5 5"}),
 			]); 
 
 			// zoom to the route
@@ -146,6 +150,20 @@
 
 			// add the route to the map
 			map2.addLayer(route);
+			
+			//add the markers
+			var markers = [];
+			for (var j=0; j < locations37.length; j++){
+				markers.push(L.marker(locations37[j], {icon: L.ExtraMarkers.icon({
+					icon: 'fa-number',
+					number: j+1,
+					markerColor: 'cyan',
+					shape: 'circle',
+					prefix: 'fa'
+				})}));
+			}
+			var fg = L.featureGroup(markers);
+			fg.addTo(map2);
 
 			// add listener to the route - every snake event show the next image and caption
 			route.on('snakestart snakepausestart snakepauseend snakeend', function(ev){
@@ -153,6 +171,9 @@
 		
 				// when the snake animation begins
 				if (ev.type === 'snakestart') {
+				
+					//get rid of the markers
+					fg.removeFrom(map2);
 				
 					//set flag and reset image
 					running = true;
@@ -168,16 +189,28 @@
 					document.getElementById("route37caption").innerHTML = "Click the button on the map to begin";
 					
 					// reset the buttons - disabled whilst moving
-					document.getElementById('btn_bk').disabled = true;
-					document.getElementById('btn_pa').disabled = true;
-					document.getElementById('btn_pl').disabled = false;
-					document.getElementById('btn_pl').disabled = true;
-					document.getElementById('btn_fw').disabled = true;
+// 					document.getElementById('btn_bk').disabled = true;
+// 					document.getElementById('btn_pa').disabled = true;
+// 					document.getElementById('btn_pl').disabled = false;
+// 					document.getElementById('btn_pl').disabled = true;
+// 					document.getElementById('btn_fw').disabled = true;
+
+					//reset not working - just force it
+					location.reload(); 
 				
 				// when the snake arrives at a pause, BEFORE the pause
 				} else if (ev.type === 'snakepausestart') {
 				
-						console.log(imgCounter);
+// 						console.log(imgCounter);
+
+						//add the number marker	
+						L.marker(locations37[imgCounter], {icon: L.ExtraMarkers.icon({
+							icon: 'fa-number',
+							number: imgCounter+1,
+							markerColor: 'cyan',
+							shape: 'circle',
+							prefix: 'fa'
+						})}).addTo(map2);
 				
 						//avoid a crash if the audio file can't be found
 						if (document.getElementById("route37panel").src = "images/37/" + images37[imgCounter]){
