@@ -55,16 +55,29 @@
 		<!-- Code to run the animation -->
 		<script>
 		
-			// detect browser by Ducktyping, redirect if necessary
-			if
-				// Safari 3.0+ "[object HTMLElementConstructor]"  
-				(/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) || 
-				// Internet Explorer 6-11
-				(/*@cc_on!@*/false || !!document.documentMode) ||
-				// Edge 20+
-				 (!isIE && !!window.StyleMedia) {
-				window.location.replace("participantB_simple.html");	 
-			}
+			/* Detect browser by Ducktyping*/
+			// Opera 8.0+
+// 			if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
+// 				var browser = 'opera';
+// 			// Firefox 1.0+
+// 			} else if (typeof InstallTrigger !== 'undefined') {
+// 				var browser = 'firefox';
+// 			// Safari 3.0+ "[object HTMLElementConstructor]" 
+// 			} else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) {
+// 				var browser = 'safari';
+// 			// Internet Explorer 6-11
+// 			} else if (/*@cc_on!@*/false || !!document.documentMode) {
+// 				var browser = 'ie';
+// 			// Edge 20+
+// 			} else if (!isIE && !!window.StyleMedia) {
+// 				var browser = 'edge';
+// 			// Chrome 1+
+// 			} else if (!!window.chrome && !!window.chrome.webstore) {
+// 				var browser = 'chrome';
+// 			// Blink engine detection
+// 			} else if ((isChrome || isOpera) && !!window.CSS) {
+// 				var browser = 'blink';
+// 			}	
 
 			//flag for whether animation is already running51 or not
 			var running51 = false;

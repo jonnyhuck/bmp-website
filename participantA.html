@@ -15,6 +15,7 @@
 		<script src="assets/js/animation/L.Polyline.SnakeAnim2.js"></script>
 		<script src="assets/js/extramarkers/js/leaflet.extra-markers.min.js"></script>
 		<script src="assets/js/Leaflet.Sleep.js"></script>
+		<script src="assets/js/bowser.min.js"></script>
 		
 		<!-- More CSS for Map -->
 		<style>
@@ -54,30 +55,11 @@
 
 		<!-- Code to run the animation -->
 		<script>
-		
-			/* Detect browser by Ducktyping*/
-			// Opera 8.0+
-// 			if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
-// 				var browser = 'opera';
-// 			// Firefox 1.0+
-// 			} else if (typeof InstallTrigger !== 'undefined') {
-// 				var browser = 'firefox';
-// 			// Safari 3.0+ "[object HTMLElementConstructor]" 
-// 			} else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) {
-// 				var browser = 'safari';
-// 			// Internet Explorer 6-11
-// 			} else if (/*@cc_on!@*/false || !!document.documentMode) {
-// 				var browser = 'ie';
-// 			// Edge 20+
-// 			} else if (!isIE && !!window.StyleMedia) {
-// 				var browser = 'edge';
-// 			// Chrome 1+
-// 			} else if (!!window.chrome && !!window.chrome.webstore) {
-// 				var browser = 'chrome';
-// 			// Blink engine detection
-// 			} else if ((isChrome || isOpera) && !!window.CSS) {
-// 				var browser = 'blink';
-// 			}	
+			
+			//redirect if crappy browser	
+			if (bowser.name !== 'Chrome' && bowser.name != 'Firefox'){
+				window.location.replace("participantA_simple.html");
+			}
 
 			//flag for whether animation is already running or not
 			var running = false;

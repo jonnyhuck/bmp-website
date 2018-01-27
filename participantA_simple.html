@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Participant B</title>
+		<title>Participant A</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -23,62 +23,75 @@
 			.map { width:100%; height: 415px; } 
 			.axis .domain { display: none;}
 			.axis text {font: 12px sans-serif; }
-			#route51panel { max-height: 415px; }
+			#route37panel { max-height: 415px; }
 		</style>
 		
 	</head>
 	<body>
 	
 		<!-- Audio elements for the interview excerpts -->
-		<audio id="51-1"><source src="audio/51/51.1.wav" type="audio/wav">Your browser does not support the audio element.</audio>
-		<audio id="51-2"><source src="audio/51/51.2.wav" type="audio/wav"></audio>
-		<audio id="51-3"><source src="audio/51/51.3.wav" type="audio/wav"></audio>
-		<audio id="51-4"><source src="audio/51/51.4.wav" type="audio/wav"></audio>
-		<audio id="51-5"><source src="audio/51/51.5.wav" type="audio/wav"></audio>
-		<audio id="51-6"><source src="audio/51/51.6.wav" type="audio/wav"></audio>
-		<audio id="51-7"><source src="audio/51/51.7.wav" type="audio/wav"></audio>
-		<audio id="51-8"><source src="audio/51/51.8.wav" type="audio/wav"></audio>
+		<audio id="37-1"><source src="audio/37/37.1.wav" type="audio/wav">Your browser does not support the audio element.</audio>
+		<audio id="37-2"><source src="audio/37/37.2.wav" type="audio/wav"></audio>
+		<audio id="37-3"><source src="audio/37/37.3.wav" type="audio/wav"></audio>
+		<audio id="37-4"><source src="audio/37/37.4.wav" type="audio/wav"></audio>
+		<audio id="37-5"><source src="audio/37/37.5.wav" type="audio/wav"></audio>
+		<audio id="37-6"><source src="audio/37/37.6.wav" type="audio/wav"></audio>
+		<audio id="37-7"><source src="audio/37/37.7.wav" type="audio/wav"></audio>
+		<audio id="37-8"><source src="audio/37/37.8.wav" type="audio/wav"></audio>
 		
 		<!-- The Map Panel -->
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
 				<!-- Map div -->
-				<div id="map3" class="map"></div>
+				<div id="map2" class="map"></div>
 			</div>
 			<div class="6u$ 12u$(medium)">
 				<!-- Panel for Photos -->
-				<span class="image fit"><img id="route51panel" src="images/animation_splash.png" alt="" onclick="snake()"/>
-				<p id="route51caption" class="caption">Click the image or play button to begin</p></span>
+				<span class="image fit"><img id="route37panel" src="images/animation_splash.png" alt="" onclick="snake()"/>
+				<p id="route37caption" class="caption">Click the image or play button to begin</p></span>
 			</div>
 		</div>
 
 		<!-- Code to run the animation -->
 		<script>
 		
-			// detect browser by Ducktyping, redirect if necessary
-			if
-				// Safari 3.0+ "[object HTMLElementConstructor]"  
-				(/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) || 
-				// Internet Explorer 6-11
-				(/*@cc_on!@*/false || !!document.documentMode) ||
-				// Edge 20+
-				 (!isIE && !!window.StyleMedia) {
-				window.location.replace("participantB_simple.html");	 
-			}
+			/* Detect browser by Ducktyping*/
+			// Opera 8.0+
+// 			if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
+// 				var browser = 'opera';
+// 			// Firefox 1.0+
+// 			} else if (typeof InstallTrigger !== 'undefined') {
+// 				var browser = 'firefox';
+// 			// Safari 3.0+ "[object HTMLElementConstructor]" 
+// 			} else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) {
+// 				var browser = 'safari';
+// 			// Internet Explorer 6-11
+// 			} else if (/*@cc_on!@*/false || !!document.documentMode) {
+// 				var browser = 'ie';
+// 			// Edge 20+
+// 			} else if (!isIE && !!window.StyleMedia) {
+// 				var browser = 'edge';
+// 			// Chrome 1+
+// 			} else if (!!window.chrome && !!window.chrome.webstore) {
+// 				var browser = 'chrome';
+// 			// Blink engine detection
+// 			} else if ((isChrome || isOpera) && !!window.CSS) {
+// 				var browser = 'blink';
+// 			}	
 
-			//flag for whether animation is already running51 or not
-			var running51 = false;
+			//flag for whether animation is already running or not
+			var running = false;
 	
 			//make a map
-			var map3 = L.map('map3');
+			var map2 = L.map('map2');
 			
 			//counter for snakepauseevent events (need to ignore first one for some reason)
-			var eventCounter51 = 0;
+			var eventCounter37 = 0;
 	
 			// get a tile layer
 			L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', 
 				{attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>. &copy; the <a href="#">Belfast Mobility Project</a> | Design by <a href="http://lunegeographic.co.uk">Lune Geographic</a>.'}
-				).addTo(map3);
+				).addTo(map2);
 	
 			//create a custom control object 
 			var customControl =  L.Control.extend({
@@ -97,51 +110,51 @@
 			});
 	
 			//add buttons panel to the map
-			map3.addControl(new customControl());		
+			map2.addControl(new customControl());
 
 			//list of images, captions and initialise counter to go with them
-			var images51 = ["1PrideofArdoyne.jpg","2WishingWell.jpg","3AllianceAvenuePeaceWall.jpg","4ArdoyneRoad.jpg","5CatholicPlaygroundonArdoyneRoad.jpg","6ArdoyneShops.jpg","7WheatfieldPrimarySchool.jpg","8JollyRodger.jpg"];
-			var captions51 = ["Loyalist graffiti","Wishing Well Family Centre","Alliance Avenue peace wall","Ardoyne Road","'Catholic' playground on the Ardoyne Road","Ardoyne shops","Wheatfield Primary School","The Jolly Roger Complex"];
-			var locations51 = [[54.620065895994372, -5.964148157623276],[54.620205913914411, -5.957860593832576],[54.619031902590734, -5.964389986999842],[54.616791493406474, -5.966975701103117],[54.615768188559954, -5.966603655908401],[54.61527268433494, -5.966306019752628],[54.619882794910367, -5.966361826531836],[54.619979730881006,-5.963757510168824]];
+			var images37 = ["1TwaddellRoundabout.jpg","2CommunityMural.jpg","3EvertonComplex.jpg","4AllianceAveSecurityCamera.jpg","5EntrancetoGlenbryn.jpg",	"6KATPostBox.jpg","7VirginMaryMural.jpg","8ArdileaCloseMural.jpg"];
+			var captions37 = ["The Twaddell Roundabout","A community mural","The Everton Complex","A security camera near the Alliance Avenue peace wall","The entrance to Glenbryn","Sectarian graffiti on a postbox","A Virgin Mary mural","Ardilea Close murals"];
+			var locations37 = [[54.613636470068577,-5.964519071327481],[54.615117706727098,-5.966012943584127],[54.616236945593059,-5.966774294269313],[54.617259030397911,-5.967135968605134],[54.617858459431574,-5.967303701630441],[54.618447257075374,-5.967502884597994],[54.615864375259754,-5.961343937574979],[54.6151897942256,-5.951024425275779]];
 			var imgCounter = 0;
 			
 			//preload images (speeds up user experience on slower machines)
 			var preloadedImages = new Array();
-			for (var i = 0; i < images51.length; i++){
+			for (var i = 0; i < images37.length; i++){
 				preloadedImages[i] = new Image();
-				preloadedImages[i].src = images51[i];
+				preloadedImages[i].src = images37[i];
 			}
 
 			// load the route into a LayerGroup with pauses that align with the audio lengths
 			var route = L.featureGroup([
-				L.polyline(lnglat2latlng([[-5.96425977118169,54.620087437244194],[-5.964148157623276,54.620065895994372]])
-					, {snakingPause: 60 * 1000, weight: 3, dashArray: "5 5"}),
-				L.polyline(lnglat2latlng([[-5.964148157623276,54.620065895994372],[-5.960836955390303,54.619096527948287],[-5.960427705676116,54.619085757062493],[-5.960148671780078,54.619085757062493],[-5.959888240143777,54.619128840588559],[-5.959665013026949,54.61916115320318],[-5.95934877461144,54.619215007503854],[-5.959013933936196,54.619268861733254],[-5.958865115858308,54.619333486714432],[-5.95867909326095,54.619441194788315],[-5.957860593832576,54.620205913914411],[-5.957860593832576,54.620205913914411]])
-					, {snakingPause: 67 * 1000, weight: 3, dashArray: "5 5"}),
-				L.polyline(lnglat2latlng([[-5.957860593832576,54.620205913914411],[-5.95867909326095,54.619441194788315],[-5.958865115858308,54.619333486714432],[-5.959013933936196,54.619268861733254],[-5.95934877461144,54.619215007503854],[-5.959665013026949,54.61916115320318],[-5.959888240143777,54.619128840588559],[-5.960148671780078,54.619085757062493],[-5.960427705676116,54.619085757062493],[-5.960836955390303,54.619096527948287],[-5.963757510168824,54.619979730881006],[-5.963943532766182,54.619764317299278],[-5.963608692090938,54.619204236649416],[-5.964389986999842,54.619031902590734]])
-					, {snakingPause: 101 * 1000, weight: 3, dashArray: "5 5"}),
-				L.polyline(lnglat2latlng([[-5.964389986999842,54.619031902590734],[-5.967515166635456,54.618450269753986],[-5.966975701103117,54.616791493406474]])
-					, {snakingPause: 77 * 1000, weight: 3, dashArray: "5 5"}),
-				L.polyline(lnglat2latlng([[-5.966975701103117,54.616791493406474],[-5.966603655908401,54.615768188559954]])
-					, {snakingPause: 47 * 1000, weight: 3, dashArray: "5 5"}),
-				L.polyline(lnglat2latlng([[-5.966603655908401,54.615768188559954],[-5.966306019752628,54.61527268433494]])
-					, {snakingPause: 15 * 1000, weight: 3, dashArray: "5 5"}),
-				L.polyline(lnglat2latlng([[-5.966306019752628,54.61527268433494],[-5.966082792635799,54.614874122210558],[-5.965971179077384,54.614744857980583],[-5.965915372298177,54.614454011961918],[-5.969673028764808,54.61686689379831],[-5.967384950817305,54.618094823371969],[-5.967515166635456,54.618450269753986],[-5.967887211830171,54.619635068602818],[-5.966361826531836,54.619882794910367]])
-					, {snakingPause: 27 * 1000, weight: 3, dashArray: "5 5"}),
-				L.polyline(lnglat2latlng([[-5.966361826531836,54.619882794910367],[-5.965227088687952,54.620108978482619],[-5.965078270610066,54.620356701904818],[-5.963757510168824,54.619979730881006]])
-					, {snakingPause: 32 * 1000, weight: 3, dashArray: "5 5"}),
+				L.polyline(lnglat2latlng([[-5.964482379728195,54.61362432856172],[-5.964519071327481,54.613636470068577]])
+					, {snakingPause: 92 * 1000, weight: 3, dashArray: "5 5"}),
+				L.polyline(lnglat2latlng([[-5.964519071327481,54.613636470068577],[-5.964602937840134,54.613675929940825],[-5.964660596067585,54.613678965314037],[-5.964697287666869,54.613672894567394],[-5.96475494589432,54.613672894567394],[-5.965986735298923,54.614468154665722],[-5.965871418844024,54.614528860905047],[-5.965902868786269,54.614619920094242],[-5.965934318728515,54.614698837893393],[-5.965981493641882,54.614774720248256],[-5.966049635183413,54.614832390743324],[-5.966133501696068,54.614890061156665],[-5.966154468324231,54.614908272849163],[-5.966138743353108,54.614950766766626],[-5.966123018381986,54.614990225364544],[-5.966133501696068,54.615032719196435],[-5.966159709981272,54.615075212983953],[-5.966012943584127,54.615117706727098]])
+					, {snakingPause: 87 * 1000, weight: 3, dashArray: "5 5"}),
+				L.polyline(lnglat2latlng([[-5.966012943584127,54.615117706727098],[-5.966159709981272,54.615075212983953],[-5.966653736157373,54.615897003755173],[-5.966774294269313,54.616236945593059]])
+					, {snakingPause: 111 * 1000, weight: 3, dashArray: "5 5"}),
+				L.polyline(lnglat2latlng([[-5.966774294269313,54.616236945593059],[-5.967135968605134,54.617259030397911]])
+					, {snakingPause: 135 * 1000, weight: 3, dashArray: "5 5"}),
+				L.polyline(lnglat2latlng([[-5.967135968605134,54.617259030397911],[-5.967303701630441,54.617858459431574]])
+					, {snakingPause: 54 * 1000, weight: 3, dashArray: "5 5"}),
+				L.polyline(lnglat2latlng([[-5.967303701630441,54.617858459431574],[-5.967502884597994,54.618447257075374]])
+					, {snakingPause: 10 * 1000, weight: 3, dashArray: "5 5"}),
+				L.polyline(lnglat2latlng([[-5.967502884597994,54.618447257075374],[-5.967896008876059,54.619620274408632],[-5.967502884597994,54.618447257075374],[-5.967303701630441,54.617858459431574],[-5.967135968605134,54.617259030397911],[-5.962826016103281,54.618064084319151],[-5.962493170881189,54.617550399537443],[-5.962178671458737,54.617076923626236],[-5.961848447065162,54.616609512515332],[-5.961511670600287,54.61611022653458],[-5.961343937574979,54.615864375259754]])
+					, {snakingPause: 117 * 1000, weight: 3, dashArray: "5 5"}),
+				L.polyline(lnglat2latlng([[-5.961343937574979,54.615864375259754],[-5.960578655647013,54.614694284947596],[-5.958155699679874,54.615195105930965],[-5.957495250892724,54.615349903897076],[-5.956591065053177,54.615334727651913],[-5.956622514995422,54.614921931613189],[-5.954744691360532,54.614873367098049],[-5.954419708623998,54.614900684644944],[-5.954524541764815,54.615307410396383],[-5.954545508392979,54.615393156164707],[-5.954603166620428,54.615602587547258],[-5.954650341533797,54.61576952483383],[-5.954744691360532,54.615933426230775],[-5.954807591245022,54.616267297404782],[-5.954603166620428,54.61629157883786],[-5.954246733941649,54.615906109377129],[-5.954178592400119,54.615915214997045],[-5.954173350743078,54.615991095083814],[-5.954183834057159,54.616045728658669],[-5.954183834057159,54.616076080613006],[-5.954115692515629,54.616100362160189],[-5.953989892746646,54.616042693461992],[-5.953861472149147,54.616085186194894],[-5.952986115423323,54.616458513298035],[-5.952881282282506,54.616501005596739],[-5.95279217411281,54.616507075921504],[-5.95272927422832,54.616510111083549],[-5.95266113268679,54.616504040759239],[-5.952152691953825,54.616355317530747],[-5.951990200585559,54.616358352704104],[-5.951885367444741,54.616358352704104],[-5.951852607088236,54.616367458222832],[-5.951658665777724,54.616273367764407],[-5.951517141037622,54.616164101152577],[-5.950437359687203,54.615289957695744],[-5.950882900535675,54.615083559972724],[-5.951024425275779,54.6151897942256]])
+					, {snakingPause: 106 * 1000, weight: 3, dashArray: "5 5"}),
 			]); 
-			
+
 			// zoom to the route
-			map3.fitBounds(route.getBounds());
+			map2.fitBounds(route.getBounds());
 
 			// add the route to the map
-			map3.addLayer(route);
+			map2.addLayer(route);
 			
 			//add the markers
 			var markers = [];
-			for (var j=0; j < locations51.length; j++){
-				markers.push(L.marker(locations51[j], {icon: L.ExtraMarkers.icon({
+			for (var j=0; j < locations37.length; j++){
+				markers.push(L.marker(locations37[j], {icon: L.ExtraMarkers.icon({
 					icon: 'fa-number',
 					number: j+1,
 					markerColor: 'cyan',
@@ -150,7 +163,7 @@
 				})}));
 			}
 			var fg = L.featureGroup(markers);
-			fg.addTo(map3);
+			fg.addTo(map2);
 
 			// add listener to the route - every snake event show the next image and caption
 			route.on('snakestart snakepausestart snakepauseend snakeend', function(ev){
@@ -160,21 +173,21 @@
 				if (ev.type === 'snakestart') {
 				
 					//get rid of the markers
-					fg.removeFrom(map3);
+					fg.removeFrom(map2);
 				
 					//set flag and reset image
-					running51 = true;
-					document.getElementById("route51panel").src = "images/animation_splash.png";
-					document.getElementById("route51caption").innerHTML = "Click the button on the map to begin";
+					running = true;
+					document.getElementById("route37panel").src = "images/animation_splash.png";
+					document.getElementById("route37caption").innerHTML = "Click the button on the map to begin";
 				
 				// when the snake animation ends
 				} else if (ev.type === 'snakeend') {
 					
 					//set flag and reset image
-					running51 = false;
-					document.getElementById("route51panel").src = "images/animation_splash.png";
-					document.getElementById("route51caption").innerHTML = "Click the button on the map to begin";
-										
+					running = false;
+					document.getElementById("route37panel").src = "images/animation_splash.png";
+					document.getElementById("route37caption").innerHTML = "Click the button on the map to begin";
+					
 					// reset the buttons - disabled whilst moving
 // 					document.getElementById('btn_bk').disabled = true;
 // 					document.getElementById('btn_pa').disabled = true;
@@ -189,23 +202,23 @@
 				} else if (ev.type === 'snakepausestart') {
 				
 // 						console.log(imgCounter);
-						
+
 						//add the number marker	
-						L.marker(locations51[imgCounter], {icon: L.ExtraMarkers.icon({
+						L.marker(locations37[imgCounter], {icon: L.ExtraMarkers.icon({
 							icon: 'fa-number',
 							number: imgCounter+1,
 							markerColor: 'cyan',
 							shape: 'circle',
 							prefix: 'fa'
-						})}).addTo(map3);
+						})}).addTo(map2);
 				
 						//avoid a crash if the audio file can't be found
-						if (document.getElementById("route51panel").src = "images/51/" + images51[imgCounter]){							
+						if (document.getElementById("route37panel").src = "images/37/" + images37[imgCounter]){
 					
 							// move the picture, caption and audio file on
-							document.getElementById("route51panel").src = "images/51/" + images51[imgCounter];
-							document.getElementById("route51caption").innerHTML = captions51[imgCounter++];
-							document.getElementById(["51","-",(imgCounter).toString()].join("")).play();
+							document.getElementById("route37panel").src = "images/37/" + images37[imgCounter];
+							document.getElementById("route37caption").innerHTML = captions37[imgCounter++];
+							document.getElementById(["37","-",(imgCounter).toString()].join("")).play();
 					
 							// set the buttons
 							document.getElementById('btn_bk').disabled = false;
@@ -220,7 +233,7 @@
 				
 					//ignore the first one
 					//TODO: NOT SURE WHY THIS IS...?				
-					if (eventCounter51 > 0){
+					if (eventCounter37 > 0){
 				
 						// set the buttons - disabled whilst moving
 						document.getElementById('btn_bk').disabled = true;
@@ -230,7 +243,7 @@
 					
 					}
 					//increment event counter
-					eventCounter51++;
+					eventCounter37++;
 				}
 			});
 
@@ -239,8 +252,8 @@
 			 */
 			function snake() {
 	
-				// only if not already running51!
-				if(!running51){
+				// only if not already running!
+				if(!running){
 		
 					// de/re-activate buttons
 					document.getElementById('btn_bk').disabled = false;
@@ -261,7 +274,7 @@
 			function skipFwd(){
 		
 				//stop and rewind the previous audio
-				var aud = document.getElementById(["51","-",(imgCounter).toString()].join(""));
+				var aud = document.getElementById(["37","-",(imgCounter).toString()].join(""));
 				aud.pause();
 				aud.currentTime = 0;
 		
@@ -275,7 +288,7 @@
 			function skipBk(){
 			
 				//stop and rewind the previous audio
-				var aud = document.getElementById(["51","-",(imgCounter).toString()].join(""));
+				var aud = document.getElementById(["37","-",(imgCounter).toString()].join(""));
 				aud.pause();
 				aud.currentTime = 0;
 		
@@ -304,7 +317,7 @@
 				document.getElementById('btn_fw').disabled = true;
 				
 				//stop the audio
-				document.getElementById(["51","-",(imgCounter).toString()].join("")).pause();
+				document.getElementById(["37","-",(imgCounter).toString()].join("")).pause();
 				
 				//pause the animation
 				route.snakePause();	//fires snakepausestart event 
@@ -315,7 +328,7 @@
 			 */
 			function play() {
 				
-				if (!running51){
+				if (!running){
 				
 					//run the animation
 					snake();
@@ -330,7 +343,7 @@
 					//TODO: Can I use this rather than the timings...?
 				
 					//continue the audio
-					var aud = document.getElementById(["51","-",(imgCounter).toString()].join(""));
+					var aud = document.getElementById(["37","-",(imgCounter).toString()].join(""));
 					aud.play();
 					
 					//continue the animation after the audio completes
