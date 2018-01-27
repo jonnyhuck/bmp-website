@@ -297,6 +297,12 @@
 		
 				//skip the animation back
 				route.snakeSkipBack();	//fires snakepausestart event 
+				
+				// set the buttons
+				document.getElementById('btn_bk').disabled = false;
+				document.getElementById('btn_pa').disabled = false;
+				document.getElementById('btn_pl').disabled = true;
+				document.getElementById('btn_fw').disabled = false;
 			}
 	
 			/**
