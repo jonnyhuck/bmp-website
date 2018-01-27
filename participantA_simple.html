@@ -94,13 +94,22 @@
 			//add the markers
 			var markers = [];
 			for (var j=0; j < locations37.length; j++){
-				markers.push(L.marker(locations37[j], {icon: L.ExtraMarkers.icon({
-					icon: 'fa-number',
-					number: j+1,
-					markerColor: 'cyan',
-					shape: 'circle',
-					prefix: 'fa'
-				})}));
+				markers.push(
+					L.marker(locations37[j], 
+						{icon: L.ExtraMarkers.icon({
+							icon: 'fa-number',
+							number: j+1,
+							markerColor: 'cyan',
+							shape: 'circle',
+							prefix: 'fa'
+					})})
+					.bindPopup('<img width="300px" src=./images/37/'+images37[j]+'>'+ captions37[j])
+					.on('popupopen', function(){document.getElementById(["37","-",(j).toString()].join("")).play();})
+					.on('popupclose', function(){
+						document.getElementById(["37","-",(j).toString()].join("")).pause();
+						document.getElementById(["37","-",(j).toString()].join("")).currentTime = 0
+					})
+				);
 			}
 			var fg = L.featureGroup(markers);
 			fg.addTo(map2);

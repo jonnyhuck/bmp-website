@@ -10,6 +10,7 @@
 		<link href="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css" rel="stylesheet" type="text/css" />
 		<script src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
 		<script src="assets/js/Leaflet.Sleep.js"></script>
+		<script src="assets/js/bowser.min.js"></script>
 		
 		<!-- Scripts for Graph -->
 		<script src="https://d3js.org/d3.v4.min.js"></script>
@@ -20,7 +21,7 @@
 			.map { width:100%; height: 415px; } 
 			.axis .domain { display: none;}
 			.axis text {font: 12px sans-serif; }
-			iframe { width: 100%;  height: 435px;}
+			iframe { width: 100%;  height: 438px;}
 			#graphnote { font-size: small; text-decoration: italic;}
 		</style>
 		
@@ -269,12 +270,21 @@
 						</div>
 						
 						<h3>Participant A</h3>
-						<p>Click the button on the map below to watch an animation of the walking interview, including audio and photographs from key stops along the way.</p>
+						<p id="pa_txt">Click the button on the map below to watch an animation of the walking interview, including audio and photographs from key stops along the way.</p>
 						<iframe src="./participantA.html"></iframe>
 						
 						<h3>Participant B</h3>
-						<p>Click the button on the map below to watch an animation of the walking interview, including audio and photographs from key stops along the way.</p>
+						<p id="pb_txt">Click the button on the map below to watch an animation of the walking interview, including audio and photographs from key stops along the way.</p>
 						<iframe src="./participantB.html"></iframe>
+						
+						<!-- This section replaces the text with the animations if we are in a poor browser -->
+						<script>
+						if (bowser.name !== 'Chrome' && bowser.name != 'Firefox'){
+							var str = "Click the numbered markers on the map below to hear an audio clip from a walking interview."
+							document.getElementById("pa_txt").innerHTML = str;
+							document.getElementById("pb_txt").innerHTML = str;
+						}
+						</script>
 					</section>
 			
 					<section  id="shared-landscapes">
