@@ -115,7 +115,7 @@
 			//list of images, captions and initialise counter to go with them
 			var images51 = ["1PrideofArdoyne.jpg","2WishingWell.jpg","3AllianceAvenuePeaceWall.jpg","4ArdoyneRoad.jpg","5CatholicPlaygroundonArdoyneRoad.jpg","6ArdoyneShops.jpg","7WheatfieldPrimarySchool.jpg","8JollyRodger.jpg"];
 			var captions51 = ["Loyalist graffiti","Wishing Well Family Centre","Alliance Avenue peace wall","Ardoyne Road","'Catholic' playground on the Ardoyne Road","Ardoyne shops","Wheatfield Primary School","The Jolly Roger Complex"];
-			var points = [[54.620065895994372, -5.964148157623276],[54.620205913914411, -5.957860593832576],[54.619031902590734, -5.964389986999842],[54.616791493406474, -5.966975701103117],[54.615768188559954, -5.966603655908401],[54.61527268433494, -5.966306019752628],[54.619882794910367, -5.966361826531836]];
+			var locations51 = [[54.620065895994372, -5.964148157623276],[54.620205913914411, -5.957860593832576],[54.619031902590734, -5.964389986999842],[54.616791493406474, -5.966975701103117],[54.615768188559954, -5.966603655908401],[54.61527268433494, -5.966306019752628],[54.619882794910367, -5.966361826531836],[54.619979730881006,-5.963757510168824]];
 			var imgCounter = 0;
 			
 			//preload images (speeds up user experience on slower machines)
@@ -127,78 +127,22 @@
 
 			// load the route into a LayerGroup with pauses that align with the audio lengths
 			var route = L.featureGroup([
-				L.marker([54.620065895994372,-5.964148157623276], {icon: L.ExtraMarkers.icon({
-					icon: 'fa-number',
-					number: '1',
-					markerColor: 'cyan',
-					shape: 'circle',
-					prefix: 'fa'
-				})}),
 				L.polyline(lnglat2latlng([[-5.96425977118169,54.620087437244194],[-5.964148157623276,54.620065895994372]])
 					, {snakingPause: 60 * 1000, weight: 3, dashArray: "5 5"}),
 				L.polyline(lnglat2latlng([[-5.964148157623276,54.620065895994372],[-5.960836955390303,54.619096527948287],[-5.960427705676116,54.619085757062493],[-5.960148671780078,54.619085757062493],[-5.959888240143777,54.619128840588559],[-5.959665013026949,54.61916115320318],[-5.95934877461144,54.619215007503854],[-5.959013933936196,54.619268861733254],[-5.958865115858308,54.619333486714432],[-5.95867909326095,54.619441194788315],[-5.957860593832576,54.620205913914411],[-5.957860593832576,54.620205913914411]])
 					, {snakingPause: 67 * 1000, weight: 3, dashArray: "5 5"}),
-				L.marker([54.620205913914411,-5.957860593832576], {icon: L.ExtraMarkers.icon({
-					icon: 'fa-number',
-					number: '2',
-					markerColor: 'cyan',
-					shape: 'circle',
-					prefix: 'fa'
-				})}),
 				L.polyline(lnglat2latlng([[-5.957860593832576,54.620205913914411],[-5.95867909326095,54.619441194788315],[-5.958865115858308,54.619333486714432],[-5.959013933936196,54.619268861733254],[-5.95934877461144,54.619215007503854],[-5.959665013026949,54.61916115320318],[-5.959888240143777,54.619128840588559],[-5.960148671780078,54.619085757062493],[-5.960427705676116,54.619085757062493],[-5.960836955390303,54.619096527948287],[-5.963757510168824,54.619979730881006],[-5.963943532766182,54.619764317299278],[-5.963608692090938,54.619204236649416],[-5.964389986999842,54.619031902590734]])
 					, {snakingPause: 101 * 1000, weight: 3, dashArray: "5 5"}),
-				L.marker([54.619031902590734,-5.964389986999842], {icon: L.ExtraMarkers.icon({
-					icon: 'fa-number',
-					number: '3',
-					markerColor: 'cyan',
-					shape: 'circle',
-					prefix: 'fa'
-				})}),
 				L.polyline(lnglat2latlng([[-5.964389986999842,54.619031902590734],[-5.967515166635456,54.618450269753986],[-5.966975701103117,54.616791493406474]])
 					, {snakingPause: 77 * 1000, weight: 3, dashArray: "5 5"}),
-				L.marker([54.616791493406474,-5.966975701103117], {icon: L.ExtraMarkers.icon({
-					icon: 'fa-number',
-					number: '4',
-					markerColor: 'cyan',
-					shape: 'circle',
-					prefix: 'fa'
-				})}),
 				L.polyline(lnglat2latlng([[-5.966975701103117,54.616791493406474],[-5.966603655908401,54.615768188559954]])
 					, {snakingPause: 47 * 1000, weight: 3, dashArray: "5 5"}),
-				L.marker([54.615768188559954,-5.966603655908401], {icon: L.ExtraMarkers.icon({
-					icon: 'fa-number',
-					number: '5',
-					markerColor: 'cyan',
-					shape: 'circle',
-					prefix: 'fa'
-				})}),
 				L.polyline(lnglat2latlng([[-5.966603655908401,54.615768188559954],[-5.966306019752628,54.61527268433494]])
 					, {snakingPause: 15 * 1000, weight: 3, dashArray: "5 5"}),
-				L.marker([54.61527268433494,-5.966306019752628], {icon: L.ExtraMarkers.icon({
-					icon: 'fa-number',
-					number: '6',
-					markerColor: 'cyan',
-					shape: 'circle',
-					prefix: 'fa'
-				})}),
 				L.polyline(lnglat2latlng([[-5.966306019752628,54.61527268433494],[-5.966082792635799,54.614874122210558],[-5.965971179077384,54.614744857980583],[-5.965915372298177,54.614454011961918],[-5.969673028764808,54.61686689379831],[-5.967384950817305,54.618094823371969],[-5.967515166635456,54.618450269753986],[-5.967887211830171,54.619635068602818],[-5.966361826531836,54.619882794910367]])
 					, {snakingPause: 27 * 1000, weight: 3, dashArray: "5 5"}),
-				L.marker([54.619882794910367,-5.966361826531836], {icon: L.ExtraMarkers.icon({
-					icon: 'fa-number',
-					number: '7',
-					markerColor: 'cyan',
-					shape: 'circle',
-					prefix: 'fa'
-				})}),
 				L.polyline(lnglat2latlng([[-5.966361826531836,54.619882794910367],[-5.965227088687952,54.620108978482619],[-5.965078270610066,54.620356701904818],[-5.963757510168824,54.619979730881006]])
 					, {snakingPause: 32 * 1000, weight: 3, dashArray: "5 5"}),
-				L.marker([54.619979730881006,-5.963757510168824], {icon: L.ExtraMarkers.icon({
-					icon: 'fa-number',
-					number: '8',
-					markerColor: 'cyan',
-					shape: 'circle',
-					prefix: 'fa'
-				})}),
 			]); 
 			
 			// zoom to the route
@@ -209,8 +153,8 @@
 			
 			//add the markers
 			var markers = [];
-			for (var j=0; j < locations37.length; j++){
-				markers.push(L.marker(locations37[j], {icon: L.ExtraMarkers.icon({
+			for (var j=0; j < locations51.length; j++){
+				markers.push(L.marker(locations51[j], {icon: L.ExtraMarkers.icon({
 					icon: 'fa-number',
 					number: j+1,
 					markerColor: 'cyan',
@@ -219,17 +163,17 @@
 				})}));
 			}
 			var fg = L.featureGroup(markers);
-			fg.addTo(map2);
+			fg.addTo(map3);
 
 			// add listener to the route - every snake event show the next image and caption
 			route.on('snakestart snakepausestart snakepauseend snakeend', function(ev){
-				console.log(ev.type);
+// 				console.log(ev.type);
 		
 				// when the snake animation begins
 				if (ev.type === 'snakestart') {
 				
 					//get rid of the markers
-					fg.removeFrom(map2);
+					fg.removeFrom(map3);
 				
 					//set flag and reset image
 					running51 = true;
@@ -257,7 +201,16 @@
 				// when the snake arrives at a pause, BEFORE the pause
 				} else if (ev.type === 'snakepausestart') {
 				
-						console.log(imgCounter);
+// 						console.log(imgCounter);
+						
+						//add the number marker	
+						L.marker(locations51[imgCounter], {icon: L.ExtraMarkers.icon({
+							icon: 'fa-number',
+							number: imgCounter+1,
+							markerColor: 'cyan',
+							shape: 'circle',
+							prefix: 'fa'
+						})}).addTo(map3);
 				
 						//avoid a crash if the audio file can't be found
 						if (document.getElementById("route51panel").src = "images/51/" + images51[imgCounter]){							
