@@ -62,7 +62,7 @@
 			var preloadedImages = new Array();
 			for (var i = 0; i < images37.length; i++){
 				preloadedImages[i] = new Image();
-				preloadedImages[i].src = images37[i];
+				preloadedImages[i].src = './images/37/' + images37[i];
 			}
 
 			// load the route into a LayerGroup with pauses that align with the audio lengths
@@ -104,10 +104,13 @@
 							prefix: 'fa'
 					})})
 					.bindPopup('<img width="300px" src=./images/37/'+images37[j]+'>'+ captions37[j])
-					.on('popupopen', function(){document.getElementById(["37","-",(j).toString()].join("")).play();})
+					.on('popupopen', function(){
+						console.log(["37","-",(j).toString()].join(""));
+						document.getElementById(["37","-",(j).toString()].join("")).play();
+					})
 					.on('popupclose', function(){
 						document.getElementById(["37","-",(j).toString()].join("")).pause();
-						document.getElementById(["37","-",(j).toString()].join("")).currentTime = 0
+						document.getElementById(["37","-",(j).toString()].join("")).currentTime = 0;
 					})
 				);
 			}
