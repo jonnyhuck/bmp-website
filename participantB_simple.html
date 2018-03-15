@@ -63,7 +63,7 @@
 			var preloadedImages = new Array();
 			for (var i = 0; i < images51.length; i++){
 				preloadedImages[i] = new Image();
-				preloadedImages[i].src = './images/51/'+images51[i];
+				preloadedImages[i].src = './images/51/' + images51[i];
 			}
 
 			// load the route into a LayerGroup with pauses that align with the audio lengths
@@ -94,9 +94,11 @@
 			
 			//add the markers
 			var markers = [];
+			var m;
 			for (var j=0; j < locations51.length; j++){
-				markers.push(
-					L.marker(locations51[j], 
+				
+				//create marker object
+				m =	L.marker(locations51[j], 
 						{icon: L.ExtraMarkers.icon({
 							icon: 'fa-number',
 							number: j+1,
@@ -105,15 +107,21 @@
 							prefix: 'fa'
 					})})
 					.bindPopup('<img width="300px" src=./images/51/'+images51[j]+'>'+ captions51[j])
-					.on('popupopen', function(){
-						document.getElementById(["51","-",(j).toString()].join("")).play();
+					.on('popupopen', function(e){
+						document.getElementById(e.popup._source._url).play();
 					})
-					.on('popupclose', function(){
-						document.getElementById(["51","-",(j).toString()].join("")).pause();
-						document.getElementById(["51","-",(j).toString()].join("")).currentTime = 0;
+					.on('popupclose', function(e){
+						document.getElementById(e.popup._source._url).pause();
+						document.getElementById(e.popup._source._url).currentTime = 0;
 					})
-				);
+				//store audio URL to be accessed in popup events
+				m._url = ["51","-",(j+1).toString()].join("");
+				
+				//load into array
+				markers.push(m);
 			}
+			
+			// group markers and add to map
 			var fg = L.featureGroup(markers);
 			fg.addTo(map3);
 	

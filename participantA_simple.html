@@ -93,9 +93,11 @@
 			
 			//add the markers
 			var markers = [];
+			var m;
 			for (var j=0; j < locations37.length; j++){
-				markers.push(
-					L.marker(locations37[j], 
+				
+				//create marker object
+				m =	L.marker(locations37[j], 
 						{icon: L.ExtraMarkers.icon({
 							icon: 'fa-number',
 							number: j+1,
@@ -104,16 +106,21 @@
 							prefix: 'fa'
 					})})
 					.bindPopup('<img width="300px" src=./images/37/'+images37[j]+'>'+ captions37[j])
-					.on('popupopen', function(){
-						console.log(["37","-",(j).toString()].join(""));
-						document.getElementById(["37","-",(j).toString()].join("")).play();
+					.on('popupopen', function(e){
+						document.getElementById(e.popup._source._url).play();
 					})
-					.on('popupclose', function(){
-						document.getElementById(["37","-",(j).toString()].join("")).pause();
-						document.getElementById(["37","-",(j).toString()].join("")).currentTime = 0;
+					.on('popupclose', function(e){
+						document.getElementById(e.popup._source._url).pause();
+						document.getElementById(e.popup._source._url).currentTime = 0;
 					})
-				);
+				//store audio URL to be accessed in popup events
+				m._url = ["37","-",(j+1).toString()].join("");
+				
+				//load into array
+				markers.push(m);
 			}
+			
+			// group markers and add to map
 			var fg = L.featureGroup(markers);
 			fg.addTo(map2);
 			
