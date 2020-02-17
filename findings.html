@@ -5,26 +5,26 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		
+
 		<!-- CSS and scripts for maps -->
 		<link href="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css" rel="stylesheet" type="text/css" />
 		<script src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
 		<script src="assets/js/Leaflet.Sleep.js"></script>
 		<script src="assets/js/bowser.min.js"></script>
-		
+
 		<!-- Scripts for Graph -->
 		<script src="https://d3js.org/d3.v4.min.js"></script>
-		
+
 		<!-- More CSS for Map -->
 		<style>
 			body { margin:0; padding:0; }
-			.map { width:100%; height: 415px; } 
+			.map { width:100%; height: 415px; }
 			.axis .domain { display: none;}
 			.axis text {font: 12px sans-serif; }
 			iframe { width: 100%;  height: 438px;}
 			#graphnote { font-size: small; text-decoration: italic;}
 		</style>
-		
+
 	</head>
 	<body class="subpage">
 
@@ -47,12 +47,12 @@
 			<!-- Content -->
 			<section id="main" class="wrapper">
 				<div class="inner">
-				
+
 					<header class="align-center">
 						<h2>Our Findings</h2>
-					</header>					
-					
-<!-- 
+					</header>
+
+<!--
 					<div class="2u$ 12u$(medium)">
 						<ul class="alt">
 							<li>Jump to:</li>
@@ -62,7 +62,7 @@
 						</ul>
 					</div>
  -->
-					
+
 					<div class="box alt">
 						<div class="row 200%">
 								<div class="4u"  style="text-align:center;"><a href="#divided-landscapes">Divided Landscapes</a></div>
@@ -70,20 +70,20 @@
 								<div class="4u$"  style="text-align:center;"><a href="#shared-landscapes"> Shared Landscapes</a></div>
 						</div>
 					</div>
-					
+
 					<section id="divided-landscapes">
-					
+
 						<h2>Divided Landscapes</h2>
-					
+
 						<!-- Intro text and Graph -->
 						<div class="row 200%">
-					
+
 							<p>The BMP used a unique, mixed methods approach to describing and explaining patterns of activity space segregation in the historically divided city of Belfast, including (1) GPS tracking allied with GIS methods of data capture, analysis and representation; (2) walking interviews, and (3) a large scale questionnaire survey.  In this section, some of our key findings are summarised under the headings Divided Landscapes, Narrated Landscapes and Shared Landscapes.</p>
-					
-							<div class="6u 12u$(medium)">							
+
+							<div class="6u 12u$(medium)">
 								<p>Most research on urban segregation has focused on global patterns of residential division captured at a single moment in time, often using government census data about where people live in cities. The Belfast Mobility Project examined how segregation may arise through the patterning of everyday movements and use of activity spaces beyond the home and over time. Based on analysis of over 20 million GPS tracking data points, the GIS image presented opposite visualises how members of Catholic and Protestant communities in North Belfast tend to use different pathways and frequent different kinds of activity spaces. Indeed, as Figure 1 below illustrates, residents spend most of their time in spaces located in their own communities and little time in ‘outgroup’ areas.</p>
 							</div>
-						
+
 							<div class="6u$ 12u$(medium)">
 
 								<!-- Graph -->
@@ -97,7 +97,7 @@
 									width = +svg.attr("width") - margin.left - margin.right,
 									height = +svg.attr("height") - margin.top - margin.bottom,
 									g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-							
+
 								// set the width and spacing of the bars
 								var x = d3.scaleBand()
 									.rangeRound([0, width/1.6	])
@@ -113,21 +113,21 @@
 									.range(['#b3cde3', '#fbb4ae', '#ccebc5']);
 
 								// load the data
-								d3.csv("gisdata/ingroup-outgroup.csv", function(d, i, columns) {
+								d3.csv("http://belfastmobilityproject.org/gisdata/ingroup-outgroup.csv", function(d, i, columns) {
 									for (i = 1, t = 0; i < columns.length; ++i) t += d[columns[i]] = +d[columns[i]];
 									d.total = t;
 									return d;
-								}, 
-							
+								},
+
 								// callback function to draw the graph
 								function(error, data) {
-								
+
 									// error handling...
 									if (error) throw error;
 
 									// get the keys from the data objects
 									var keys = data.columns.slice(1);
-	
+
 									// set values for the axes (group on x, 0-100% on y)
 									x.domain(data.map(function(d) { return d.Group; }));
 									y.domain([0, 100]);
@@ -152,7 +152,7 @@
 									  .attr("class", "axis")
 									  .attr("transform", "translate(0," + height + ")")
 									  .call(d3.axisBottom(x));
-								
+
 									//
 									g.append("g")
 									  .attr("class", "axis")
@@ -187,13 +187,13 @@
 									  .attr("dy", "0.32em")
 									  .text(function(d) { return d; });
 									});
-								</script>								
+								</script>
 							</div>
-						</div>	
-					
+						</div>
+
 						<!-- Map -->
 						<div class="figure">
-					
+
 							<!-- Map div -->
 							<div id="map" class="map"></div>
 
@@ -222,11 +222,11 @@
 
 								// Fit to overlay bounds (SW and NE points with (lat, lon))
 								map.fitBounds([[54.5984808619, -5.9115522413], [54.6596264794, -6.00210242203]]);
-						
+
 							</script>
 							<p class="caption">GPS Tracks of 196 participants by commmunity affiliation. <a target='_blank' href="./gps.html">Click to View Map Full Screen</a></p>
 						</div>
-					
+
 						<div class="row 200%">
 							<div class="6u 12u$(medium)">
 								<div class="figure">
@@ -238,7 +238,7 @@
 								<p>Two further aspects of the patterning of activity-space segregation in North Belfast are worth noting. Firstly, to a large extent, it is maintained by residents’ movements through, and use of, tertiary street networks or ‘T-Communities’ (Grannis, 1998). Such networks form systems of social and spatial (dis)connection between neighbours, enabling segregation to emerge even in contexts where different communities live in close proximity to one another. Grannis (1998) has labelled such networks ‘T-communities’.</p>
 							</div>
 						</div>
-					
+
 						<div class="row 200%">
 							<div class="6u 12u$(medium)">
 								<p>Second, activity-space segregation marked social relations even in ‘public’ spaces that would ordinarily be sites of urban mixing. For example, parks are typically conceived as quintessentially open and inclusive facilities designed for members of all communities to enjoy freely. However, our walking interview data suggests that the use of parks in North Belfast is often organised along sectarian lines, with residents using different access points and sometimes avoiding completely areas associated with the ‘other’ community. At this point in North Belfast’s history, we would describe areas such as parks as ‘liminal spaces’ – they are simultaneously public, open spaces and sectarian and divided spaces. In their everyday lives, local residents must negotiate this ‘in betweenness’ as they engage in such ordinary activities as walking their dogs or taking their kids to the play areas.</p>
@@ -252,10 +252,10 @@
 							</div>
 						</div>
 					</section>
-					
+
 					<section id="narrated-landscapes">
 						<h2>Narrated Landscapes</h2>
-			
+
 						<div class="row 200%">
 							<div class="6u 12u$(medium)">
 								<div class="figure">
@@ -268,15 +268,15 @@
 								<p>Here, two tracked walks demonstrate markedly different patterns of movement between a Catholic participant from Ardoyne and a Protestant participant from the adjacent Glenbryn neighborhood. Their respective perceptions of threat, shared space and communal identity differ in ways that help to sustain activity-space segregation. Click on the maps below to hear the participants’ commentary about how features in the landscape and broader social dynamics impact their mobility choices.</p>
 							</div>
 						</div>
-						
+
 						<h3>Participant A</h3>
 						<p id="pa_txt">Click the button on the map below to watch an animation of the walking interview, including audio and photographs from key stops along the way.</p>
 						<iframe src="./participantA.html"></iframe>
-						
+
 						<h3>Participant B</h3>
 						<p id="pb_txt">Click the button on the map below to watch an animation of the walking interview, including audio and photographs from key stops along the way.</p>
 						<iframe src="./participantB.html"></iframe>
-						
+
 						<!-- This section replaces the text with the animations if we are in a poor browser -->
 						<script>
 						if (bowser.name !== 'Chrome' && bowser.name != 'Firefox'){
@@ -286,17 +286,17 @@
 						}
 						</script>
 					</section>
-			
+
 					<section  id="shared-landscapes">
 						<h2>Shared Landscapes</h2>
-						
+
 						<div class="row 200%">
-						
+
 							<div class="6u 12u(medium)">
 								<h3>Destinations in shared spaces</h3>
 								<p>Although our results evidenced high levels of activity space segregation in North Belfast, we also found that a significant proportion of both Protestant and Catholic residents’ time was spent accessing facilities located in ‘shared’ or ‘mixed’ spaces.  Particularly during the afternoon period between 12pm and 6pm, for example, residents visited destinations located in shared public areas, including leisure facilities, industrial areas, shopping centres, large retail stores, and other spaces of consumption (see Table). The time geography of everyday mobility patterns in North Belfast, then, features a complex blend of separation and mixing, reproduced each day as residents actively use the everyday spaces of the city.</p>
 							</div>
-						
+
 							<div class="6u 12u$(medium)">
 								<p class="caption">Residents’ destinations over time<p>
 
@@ -310,7 +310,7 @@
 								</table>
 							</div>
 						</div>
-						
+
 						<div class="row 200%">
 							<div class="6u 12u(medium)">
 								<p class="caption" id="graphcaption"><em>"I prefer to avoid using facilities located in or near the other community's areas of the city"</em></p>
@@ -321,21 +321,21 @@
 								<p>This pattern is reflected not only in mobility practices, but also in participants’ attitudes. Our questionnaire data provided further evidence that residents’ attitudes towards sectarian segregation may be changing for the better.  Many residents (between 40% and 50% across six survey items) expressed positive feelings about using facilities based in or near the other community’s areas.  Perhaps surprisingly, a smaller percentage of between 23% and 34% expressed clearly negative feelings, with between 23% and 26% remaining undecided.  For both Catholic and Protestant respondents, greater self-reported willingness to use activity spaces beyond their own community was predicted by factors such as perceived threat to personal safety and group identity and the nature of their past contact experiences with members of the ‘other’ community.</p>
 							</div>
 						</div>
-						
+
 						<div class="row 200%">
 							<div class="6u 12u(medium)">
 
 								<h3>The city centre as a shared space</h3>
 								<p>A final line of evidence on the potential sharing of space concerns residents’ use of Belfast city centre.  For the most part, the city centre is now treated as a space of inclusion and belonging that has historically improved. GPS tracking and survey data, for example, suggest that the majority of the city’s central spaces and routes are widely used and perceived as shared by members of both Catholic and Protestant communities.  However, some residents do continue to feel unwelcome in certain areas of the city centre and worry that they might have negative encounters with the ‘other community’.</p>
 							</div>
-							
+
 							<div class="6u 12u$(medium)">
 								<p class="caption" id="graphcaption">Survey data on the city centre as a shared and inclusive place: mean attitudes.</p>
 								<iframe src="./barchart.html"></iframe>
 							</div>
 						</div>
 					</section>
-					
+
 				</div>
 			</section>
 
