@@ -6,29 +6,29 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-		
+
 		<!-- CSS and scripts for maps -->
 		<link rel="stylesheet" href="assets/js/extramarkers/css/leaflet.extra-markers.min.css"/>
-		<link href="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css" rel="stylesheet" type="text/css" />
-		<script src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+		<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 		<script src="assets/js/animation/L.Polyline.SnakeAnim2.js"></script>
 		<script src="assets/js/extramarkers/js/leaflet.extra-markers.min.js"></script>
 		<script src="assets/js/Leaflet.Sleep.js"></script>
 		<script src="assets/js/bowser.min.js"></script>
-		
+
 		<!-- More CSS for Map -->
 		<style>
 			html, body {overflow: hidden;}
 			body { margin:0; padding:0; }
-			.map { width:100%; height: 415px; } 
+			.map { width:100%; height: 415px; }
 			.axis .domain { display: none;}
 			.axis text {font: 12px sans-serif; }
 			#route51panel { max-height: 415px; }
 		</style>
-		
+
 	</head>
 	<body>
-	
+
 		<!-- Audio elements for the interview excerpts -->
 		<audio id="51-1"><source src="audio/51/51.1.wav" type="audio/wav">Your browser does not support the audio element.</audio>
 		<audio id="51-2"><source src="audio/51/51.2.wav" type="audio/wav"></audio>
@@ -38,7 +38,7 @@
 		<audio id="51-6"><source src="audio/51/51.6.wav" type="audio/wav"></audio>
 		<audio id="51-7"><source src="audio/51/51.7.wav" type="audio/wav"></audio>
 		<audio id="51-8"><source src="audio/51/51.8.wav" type="audio/wav"></audio>
-		
+
 		<!-- The Map Panel -->
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
@@ -54,51 +54,51 @@
 
 		<!-- Code to run the animation -->
 		<script>
-		
-			//redirect if crappy browser	
+
+			//redirect if crappy browser
 			if (bowser.name !== 'Chrome' && bowser.name != 'Firefox'){
 				window.location.replace("participantB_simple.html");
 			}
 
 			//flag for whether animation is already running51 or not
 			var running51 = false;
-	
+
 			//make a map
 			var map3 = L.map('map3');
-			
+
 			//counter for snakepauseevent events (need to ignore first one for some reason)
 			var eventCounter51 = 0;
-	
+
 			// get a tile layer
-			L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', 
+			L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
 				{attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>. &copy; the <a href="#">Belfast Mobility Project</a> | Design by <a href="http://lunegeographic.co.uk">Lune Geographic</a>.'}
 				).addTo(map3);
-	
-			//create a custom control object 
+
+			//create a custom control object
 			var customControl =  L.Control.extend({
 				options: { position: 'topright' },
 				onAdd: function (m) {	//construct the button
 					var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-						container.style.backgroundColor = 'white';     
+						container.style.backgroundColor = 'white';
 						container.innerHTML = '<button id="btn_bk" onclick="skipBk()" disabled="true"><i class="fa fa-fast-backward fa-lg"></i></button><button id="btn_pa" onclick="pause()" disabled="true"><i class="fa fa-pause fa-lg"></i></button><button id="btn_pl" onclick="play()"><i class="fa fa-play fa-lg"></i></button><button id="btn_st" onclick="stop()" disabled="true"><i class="fa fa-stop fa-lg"></i></button><button id="btn_fw" onclick="skipFwd()" disabled="true"><i class="fa fa-fast-forward fa-lg"></i></button>';
 						container.style.padding = "5px";
 						container.style.color = "black";
-			
+
 					//prevent clicks from being propagated to the map
 					L.DomEvent.disableClickPropagation(container);
 					return container;
 				}
 			});
-	
+
 			//add buttons panel to the map
-			map3.addControl(new customControl());		
+			map3.addControl(new customControl());
 
 			//list of images, captions and initialise counter to go with them
 			var images51 = ["1PrideofArdoyne.jpg","2WishingWell.jpg","3AllianceAvenuePeaceWall.jpg","4ArdoyneRoad.jpg","5CatholicPlaygroundonArdoyneRoad.jpg","6ArdoyneShops.jpg","7WheatfieldPrimarySchool.jpg","8JollyRodger.jpg"];
 			var captions51 = ["Loyalist graffiti","Wishing Well Family Centre","Alliance Avenue peace wall","Ardoyne Road","'Catholic' playground on the Ardoyne Road","Ardoyne shops","Wheatfield Primary School","The Jolly Roger Complex"];
 			var locations51 = [[54.620065895994372, -5.964148157623276],[54.620205913914411, -5.957860593832576],[54.619031902590734, -5.964389986999842],[54.616791493406474, -5.966975701103117],[54.615768188559954, -5.966603655908401],[54.61527268433494, -5.966306019752628],[54.619882794910367, -5.966361826531836],[54.619979730881006,-5.963757510168824]];
 			var imgCounter = 0;
-			
+
 			//preload images (speeds up user experience on slower machines)
 			var preloadedImages = new Array();
 			for (var i = 0; i < images51.length; i++){
@@ -124,14 +124,14 @@
 					, {snakingPause: 27 * 1000, weight: 3, dashArray: "5 5"}),
 				L.polyline(lnglat2latlng([[-5.966361826531836,54.619882794910367],[-5.965227088687952,54.620108978482619],[-5.965078270610066,54.620356701904818],[-5.963757510168824,54.619979730881006]])
 					, {snakingPause: 32 * 1000, weight: 3, dashArray: "5 5"}),
-			]); 
-			
+			]);
+
 			// zoom to the route
 			map3.fitBounds(route.getBounds());
 
 			// add the route to the map
 			map3.addLayer(route);
-			
+
 			//add the markers
 			var markers = [];
 			for (var j=0; j < locations51.length; j++){
@@ -149,26 +149,26 @@
 			// add listener to the route - every snake event show the next image and caption
 			route.on('snakestart snakepausestart snakepauseend snakeend', function(ev){
 // 				console.log(ev.type);
-		
+
 				// when the snake animation begins
 				if (ev.type === 'snakestart') {
-				
+
 					//get rid of the markers
 					fg.removeFrom(map3);
-				
+
 					//set flag and reset image
 					running51 = true;
 					document.getElementById("route51panel").src = "images/animation_splash.png";
 					document.getElementById("route51caption").innerHTML = "Click the button on the map to begin";
-				
+
 				// when the snake animation ends
 				} else if (ev.type === 'snakeend') {
-					
+
 					//set flag and reset image
 					running51 = false;
 					document.getElementById("route51panel").src = "images/animation_splash.png";
 					document.getElementById("route51caption").innerHTML = "Click the button on the map to begin";
-										
+
 					// reset the buttons - disabled whilst moving
 // 					document.getElementById('btn_bk').disabled = true;
 // 					document.getElementById('btn_pa').disabled = true;
@@ -177,14 +177,14 @@
 // 					document.getElementById('btn_fw').disabled = true;
 
 					//reset not working - just force it
-					location.reload(); 
-				
+					location.reload();
+
 				// when the snake arrives at a pause, BEFORE the pause
 				} else if (ev.type === 'snakepausestart') {
-				
+
 // 						console.log(imgCounter);
-						
-						//add the number marker	
+
+						//add the number marker
 						L.marker(locations51[imgCounter], {icon: L.ExtraMarkers.icon({
 							icon: 'fa-number',
 							number: imgCounter+1,
@@ -192,15 +192,15 @@
 							shape: 'circle',
 							prefix: 'fa'
 						})}).addTo(map3);
-				
+
 						//avoid a crash if the audio file can't be found
-						if (document.getElementById("route51panel").src = "images/51/" + images51[imgCounter]){							
-					
+						if (document.getElementById("route51panel").src = "images/51/" + images51[imgCounter]){
+
 							// move the picture, caption and audio file on
 							document.getElementById("route51panel").src = "images/51/" + images51[imgCounter];
 							document.getElementById("route51caption").innerHTML = captions51[imgCounter++];
 							document.getElementById(["51","-",(imgCounter).toString()].join("")).play();
-					
+
 							// set the buttons
 							document.getElementById('btn_bk').disabled = false;
 							document.getElementById('btn_pa').disabled = false;
@@ -208,20 +208,20 @@
 							document.getElementById('btn_fw').disabled = false;
 						}
 
-				
+
 				//when the snake leaves a pause, AFTER the pause
 				} else if (ev.type === 'snakepauseend') {
-				
+
 					//ignore the first one
-					//TODO: NOT SURE WHY THIS IS...?				
+					//TODO: NOT SURE WHY THIS IS...?
 					if (eventCounter51 > 0){
-				
+
 						// set the buttons - disabled whilst moving
 						document.getElementById('btn_bk').disabled = true;
 						document.getElementById('btn_pa').disabled = true;
 						document.getElementById('btn_pl').disabled = true;
 						document.getElementById('btn_fw').disabled = true;
-					
+
 					}
 					//increment event counter
 					eventCounter51++;
@@ -232,117 +232,117 @@
 			 * convenience function to run the animation
 			 */
 			function snake() {
-	
+
 				// only if not already running51!
 				if(!running51){
-		
+
 					// de/re-activate buttons
 					document.getElementById('btn_bk').disabled = false;
 					document.getElementById('btn_pa').disabled = false;
 					document.getElementById('btn_pl').disabled = true;
 					document.getElementById('btn_st').disabled = false;
 					document.getElementById('btn_fw').disabled = false;
-			
+
 					//reset counter and run animation
 					imgCounter = 0;
 					route.snakeIn();
 				}
 			}
-	
+
 			/**
 			 * skip the animation forward
 			 */
 			function skipFwd(){
-		
+
 				//stop and rewind the previous audio
 				var aud = document.getElementById(["51","-",(imgCounter).toString()].join(""));
 				aud.pause();
 				aud.currentTime = 0;
-		
+
 				//skip the animation forward
-				route.snakeSkipForward();	//fires snakepausestart event 
+				route.snakeSkipForward();	//fires snakepausestart event
 			}
-	
+
 			/**
 			 * skip the animation backward
 			 */
 			function skipBk(){
-			
+
 				//stop and rewind the previous audio
 				var aud = document.getElementById(["51","-",(imgCounter).toString()].join(""));
 				aud.pause();
 				aud.currentTime = 0;
-		
+
 				//decrement the counter
 				imgCounter--;
-		
+
 				//skip the animation back
-				route.snakeSkipBack();	//fires snakepausestart event 
-				
+				route.snakeSkipBack();	//fires snakepausestart event
+
 				// set the buttons
 				document.getElementById('btn_bk').disabled = false;
 				document.getElementById('btn_pa').disabled = false;
 				document.getElementById('btn_pl').disabled = true;
 				document.getElementById('btn_fw').disabled = false;
 			}
-	
+
 			/**
 			 * pause the animation
 			 */
 			function pause() {
-	
+
 				// de/re-activate buttons
 				document.getElementById('btn_bk').disabled = true;
 				document.getElementById('btn_pa').disabled = true;
 				document.getElementById('btn_pl').disabled = false;
 				document.getElementById('btn_fw').disabled = true;
-				
+
 				//stop the audio
 				document.getElementById(["51","-",(imgCounter).toString()].join("")).pause();
-				
+
 				//pause the animation
-				route.snakePause();	//fires snakepausestart event 
+				route.snakePause();	//fires snakepausestart event
 			}
-	
+
 			/**
 			 * resume the animation
 			 */
 			function play() {
-				
+
 				if (!running51){
-				
+
 					//run the animation
 					snake();
-				
+
 				} else {
 					// de/re-activate buttons
 					document.getElementById('btn_bk').disabled = false;
 					document.getElementById('btn_pa').disabled = false;
 					document.getElementById('btn_pl').disabled = true;
 					document.getElementById('btn_fw').disabled = false;
-					
+
 					//TODO: Can I use this rather than the timings...?
-				
+
 					//continue the audio
 					var aud = document.getElementById(["51","-",(imgCounter).toString()].join(""));
 					aud.play();
-					
+
 					//continue the animation after the audio completes
 					aud.onended = function(){
 						route.snakeResume();
 					};
 				}
-			} 
-	
+			}
+
 			/**
 			 * stop the animation
 			 */
 			function stop() {
-		
+
 				//just refresh the page (as designed to be viewed through iframe)
-				location.reload(); 
-			} 
-	
+				location.reload();
+			}
+
 			/**
 			 * convert LngLat array to LatLng (and vice-versa)
 			 */

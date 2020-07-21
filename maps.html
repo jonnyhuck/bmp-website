@@ -5,16 +5,16 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		
+
 		<!-- CSS and scripts for map -->
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
-		<script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+		<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 		<script src="assets/js/Leaflet.Sleep.js"></script>
-		
+
 		<!-- More CSS for Map -->
 		<style>
 			body { margin:0; padding:0; }
-			.map { width:100%; height: 400px;} 
+			.map { width:100%; height: 400px;}
 			.c { color: cyan; font-weight: bold; background-color: #666; padding-left: 2px; padding-right: 2px; }
 			.m { color: magenta; font-weight: bold; background-color: #666; padding-left: 2px; padding-right: 2px; }
 			.y { color: yellow; font-weight: bold; background-color: #666; padding-left: 2px; padding-right: 2px; }
@@ -42,30 +42,30 @@
 			<!-- Content -->
 			<section id="main" class="wrapper">
 				<div class="inner">
-			
+
 					<header class="align-center">
 						<h2>Interactive Maps</h2>
 						<p><em>Here are a selection of interactive maps that may be used to explore our findings in detail</em></p>
-					</header>	
-					
+					</header>
+
 					<div class="row 200%">
-					
+
 						<!-- Community Affiliation -->
-						<div id="community" class="6u 12u$(medium)">							
+						<div id="community" class="6u 12u$(medium)">
 							<h2>Participatory GIS (PGIS) data on community affiliation.</h2>
-							<p>This map show data collected from 33 participants using the <a href="http://map-me.org">Map-Me</a> 
-							participatory mapping platform, in response to requests for them to identify areas that they considered 
+							<p>This map show data collected from 33 participants using the <a href="http://map-me.org">Map-Me</a>
+							participatory mapping platform, in response to requests for them to identify areas that they considered
 							to be 'Catholic', 'Protestant' or 'Mixed'.</p>
-							
-							<p>As might be expected, this map shows a great deal of perceived segregation 
-							between the residential areas that are occupied by <span class="c">Catholic</span> and <span class="m">Protestant</span> communities, 
-							with relatively few areas denoted as <span class="y">mixed</span>. There are also low levels of disagreement between 
-							the various groups (red, green, blue, black), reinforcing the notion of a ‘shared understanding’ of boundaries 
+
+							<p>As might be expected, this map shows a great deal of perceived segregation
+							between the residential areas that are occupied by <span class="c">Catholic</span> and <span class="m">Protestant</span> communities,
+							with relatively few areas denoted as <span class="y">mixed</span>. There are also low levels of disagreement between
+							the various groups (red, green, blue, black), reinforcing the notion of a ‘shared understanding’ of boundaries
 							existing between communities. </p>
 						</div>
-						
-						<div class="6u$ 12u$(medium)">					
-							
+
+						<div class="6u$ 12u$(medium)">
+
 							<!-- Map div -->
 							<div class="map" id="community_map"></div>
 							<p class="caption"><a target='_blank' href="./community.html">Click to View Map Full Screen</a></p>
@@ -95,13 +95,13 @@
 
 								// Fit to overlay bounds (SW and NE points with (lat, lon))
 								map.fitBounds([[54.5984808619, -5.9115522413], [54.6596264794, -6.00210242203]]);
-						
+
 							</script>
 						</div>
-						
+
 						<!-- Shared Spaces -->
-						<div id="sharing" class="6u 12u$(medium)">	
-												
+						<div id="sharing" class="6u 12u$(medium)">
+
 							<!-- Map div -->
 							<div class="map" id="shared_map"></div>
 							<p class="caption"><a target='_blank' href="./sharing.html">Click to View Map Full Screen</a></p>
@@ -131,36 +131,36 @@
 
 								// Fit to overlay bounds (SW and NE points with (lat, lon))
 								map.fitBounds([[54.5984808619, -5.9115522413], [54.6596264794, -6.00210242203]]);
-						
+
 							</script>
 						</div>
-						
-						<div class="6u$ 12u$(medium)">					
+
+						<div class="6u$ 12u$(medium)">
 							<h2>Participatory GIS (PGIS) data on shared spaces.</h2>
-							<p>This map shows data collected from the same 33 participants using <a href="http://map-me.org">Map-Me</a>, 
-							this time in response to the question: <i>“Please spray any local areas that you would define as public 
-							spaces that are shared by both communities”</i>. This time with the respective colours refer to the 
-							self-reported community affiliation of each participant: <span class="c">Catholic</span>, <span class="m">Protestant</span>, 
+							<p>This map shows data collected from the same 33 participants using <a href="http://map-me.org">Map-Me</a>,
+							this time in response to the question: <i>“Please spray any local areas that you would define as public
+							spaces that are shared by both communities”</i>. This time with the respective colours refer to the
+							self-reported community affiliation of each participant: <span class="c">Catholic</span>, <span class="m">Protestant</span>,
 							and <span class="y">those who do not identify with either community</span>.</p>
-							
-							<p>This map reinforces the idea of ‘shared understanding’ of territory between communities, and it is interesting that the locations 
-							that have identified as 'shared' are typically shopping centres, leisure centres and similar. Parks also feature prominently in this 
+
+							<p>This map reinforces the idea of ‘shared understanding’ of territory between communities, and it is interesting that the locations
+							that have identified as 'shared' are typically shopping centres, leisure centres and similar. Parks also feature prominently in this
 							dataset, though it is interesting that there is some variation in which parks are considered as shared, and by whom.</p>
 						</div>
-						
+
 						<!-- GPS Tracks -->
-						<div id="gps" class="6u 12u$(medium)">							
+						<div id="gps" class="6u 12u$(medium)">
 							<h2>GPS traces revealing residents' movements</h2>
-							<p>This map shows the movements of 196 participants over a two week period, revealing where community members do and do not mix in 
+							<p>This map shows the movements of 196 participants over a two week period, revealing where community members do and do not mix in
 							North Belfast. The data was collected using the Belfast Pathways Android App, as is described in the <a href="./researchers.html#gps-tracking">For Researchers</a>
 							section of this website. Participants' locations were collected every four seconds and stored in a database. They have been coloured according
 							to the community membership of the participant: <span class="c">Catholic</span>, <span class="m">Protestant</span>, and <span class="y">those who do not identify with either community</span>.</p>
-							<p>The outstanding pattern in the dataset of GPS traces is the seemingly indiscriminate mixing of communities along main roads, and 
+							<p>The outstanding pattern in the dataset of GPS traces is the seemingly indiscriminate mixing of communities along main roads, and
 							the lack of any such mixing in residential areas.</p>
 						</div>
-						
-						<div class="6u$ 12u$(medium)">					
-							
+
+						<div class="6u$ 12u$(medium)">
+
 							<!-- Map div -->
 							<div class="map" id="gps_map"></div>
 							<p class="caption"><a target='_blank' href="./gps.html">Click to View Map Full Screen</a></p>
@@ -190,15 +190,15 @@
 
 								// Fit to overlay bounds (SW and NE points with (lat, lon))
 								map.fitBounds([[54.5984808619, -5.9115522413], [54.6596264794, -6.00210242203]]);
-						
+
 							</script>
-							
+
 						</div>
-						
+
 					</div>
 				</div>
 			</section>
-			
+
 			<!-- Footer -->
 			<footer id="footer">
 				<div class="inner">

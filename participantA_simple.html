@@ -7,24 +7,24 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
 		<link rel="stylesheet" href="assets/js/extramarkers/css/leaflet.extra-markers.min.css"/>
-		<link href="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css" rel="stylesheet" type="text/css" />
-		<script src="http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js"></script>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+		<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 		<script src="assets/js/extramarkers/js/leaflet.extra-markers.min.js"></script>
 		<script src="assets/js/Leaflet.Sleep.js"></script>
-		
+
 		<!-- More CSS for Map -->
 		<style>
 			html, body {overflow: hidden;}
 			body { margin:0; padding:0; }
-			.map { width:100%; height: 415px; } 
+			.map { width:100%; height: 415px; }
 			.axis .domain { display: none;}
 			.axis text {font: 12px sans-serif; }
 			#route37panel { max-height: 415px; }
 		</style>
-		
+
 	</head>
 	<body>
-	
+
 		<!-- Audio elements for the interview excerpts -->
 		<audio id="37-1"><source src="audio/37/37.1.wav" type="audio/wav">Your browser does not support the audio element.</audio>
 		<audio id="37-2"><source src="audio/37/37.2.wav" type="audio/wav"></audio>
@@ -43,13 +43,13 @@
 			</div>
 		</div>
 
-		<script>	
-	
+		<script>
+
 			//make a map
 			var map2 = L.map('map2');
-	
+
 			// get a tile layer
-			L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', 
+			L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
 				{attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>. &copy; the <a href="#">Belfast Mobility Project</a> | Design by <a href="http://lunegeographic.co.uk">Lune Geographic</a>.'}
 			).addTo(map2);
 
@@ -57,7 +57,7 @@
 			var images37 = ["1TwaddellRoundabout.jpg","2CommunityMural.jpg","3EvertonComplex.jpg","4AllianceAveSecurityCamera.jpg","5EntrancetoGlenbryn.jpg",	"6KATPostBox.jpg","7VirginMaryMural.jpg","8ArdileaCloseMural.jpg"];
 			var captions37 = ["The Twaddell Roundabout","A community mural","The Everton Complex","A security camera near the Alliance Avenue peace wall","The entrance to Glenbryn","Sectarian graffiti on a postbox","A Virgin Mary mural","Ardilea Close murals"];
 			var locations37 = [[54.613636470068577,-5.964519071327481],[54.615117706727098,-5.966012943584127],[54.616236945593059,-5.966774294269313],[54.617259030397911,-5.967135968605134],[54.617858459431574,-5.967303701630441],[54.618447257075374,-5.967502884597994],[54.615864375259754,-5.961343937574979],[54.6151897942256,-5.951024425275779]];
-			
+
 			//preload images (speeds up user experience on slower machines)
 			var preloadedImages = new Array();
 			for (var i = 0; i < images37.length; i++){
@@ -83,21 +83,21 @@
 					, {weight: 3, dashArray: "5 5"}),
 				L.polyline(lnglat2latlng([[-5.961343937574979,54.615864375259754],[-5.960578655647013,54.614694284947596],[-5.958155699679874,54.615195105930965],[-5.957495250892724,54.615349903897076],[-5.956591065053177,54.615334727651913],[-5.956622514995422,54.614921931613189],[-5.954744691360532,54.614873367098049],[-5.954419708623998,54.614900684644944],[-5.954524541764815,54.615307410396383],[-5.954545508392979,54.615393156164707],[-5.954603166620428,54.615602587547258],[-5.954650341533797,54.61576952483383],[-5.954744691360532,54.615933426230775],[-5.954807591245022,54.616267297404782],[-5.954603166620428,54.61629157883786],[-5.954246733941649,54.615906109377129],[-5.954178592400119,54.615915214997045],[-5.954173350743078,54.615991095083814],[-5.954183834057159,54.616045728658669],[-5.954183834057159,54.616076080613006],[-5.954115692515629,54.616100362160189],[-5.953989892746646,54.616042693461992],[-5.953861472149147,54.616085186194894],[-5.952986115423323,54.616458513298035],[-5.952881282282506,54.616501005596739],[-5.95279217411281,54.616507075921504],[-5.95272927422832,54.616510111083549],[-5.95266113268679,54.616504040759239],[-5.952152691953825,54.616355317530747],[-5.951990200585559,54.616358352704104],[-5.951885367444741,54.616358352704104],[-5.951852607088236,54.616367458222832],[-5.951658665777724,54.616273367764407],[-5.951517141037622,54.616164101152577],[-5.950437359687203,54.615289957695744],[-5.950882900535675,54.615083559972724],[-5.951024425275779,54.6151897942256]])
 					, {weight: 3, dashArray: "5 5"}),
-			]); 
+			]);
 
 			// zoom to the route
 			map2.fitBounds(route.getBounds());
 
 			// add the route to the map
 			map2.addLayer(route);
-			
+
 			//add the markers
 			var markers = [];
 			var m;
 			for (var j=0; j < locations37.length; j++){
-				
+
 				//create marker object
-				m =	L.marker(locations37[j], 
+				m =	L.marker(locations37[j],
 						{icon: L.ExtraMarkers.icon({
 							icon: 'fa-number',
 							number: j+1,
@@ -115,16 +115,16 @@
 					})
 				//store audio URL to be accessed in popup events
 				m._url = ["37","-",(j+1).toString()].join("");
-				
+
 				//load into array
 				markers.push(m);
 			}
-			
+
 			// group markers and add to map
 			var fg = L.featureGroup(markers);
 			fg.addTo(map2);
-			
-	
+
+
 			/**
 			 * convert LngLat array to LatLng (and vice-versa)
 			 */
